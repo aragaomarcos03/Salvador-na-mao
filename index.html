@@ -1,86 +1,114 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Salvador na Mão</title>
 <style>
-:root{--navy:#123c35;--green:#176b52;--lime:#d8f36a;--paper:#f6f7f2;--ink:#172a25;--muted:#66756e;--line:#e1e7df}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-header{background:linear-gradient(125deg,#103c35,#1e7255);color:white;padding:24px 18px 28px;border-radius:0 0 26px 26px}
-.top{max-width:1000px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:20px;letter-spacing:-.5px}.logo{display:grid;place-items:center;width:42px;height:42px;background:var(--lime);color:#143c32;border-radius:14px;font-size:22px}
-.pill{border:1px solid #ffffff70;border-radius:99px;padding:8px 12px;font-size:12px;color:#f4ffe9}
-.hero{max-width:1000px;margin:28px auto 0}.eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--lime)}h1{font-size:clamp(30px,6vw,48px);line-height:1.05;letter-spacing:-1.8px;margin:10px 0 12px;max-width:640px}.hero p{color:#e0eee7;max-width:570px;line-height:1.55;margin:0 0 20px}
-.search{display:flex;gap:8px;max-width:690px}.search input{flex:1;min-width:0;border:0;border-radius:14px;padding:15px 16px;font-size:15px}.btn{border:0;border-radius:13px;padding:13px 16px;font-weight:800;cursor:pointer;background:var(--lime);color:#173c30}.btn.secondary{background:white;border:1px solid var(--line);color:var(--ink)}.btn.dark{background:var(--green);color:white}
-main{max-width:1000px;margin:24px auto;padding:0 16px 100px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:25px 0 14px}.section-head h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-head p{font-size:13px;color:var(--muted);margin:5px 0 0}.categories{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.cat{background:white;border:1px solid var(--line);border-radius:16px;padding:15px 8px;text-align:center;cursor:pointer;transition:.15s}.cat:hover,.cat.active{border-color:var(--green);background:#eaf4eb}.cat .emoji{font-size:24px;display:block;margin-bottom:8px}.cat span:last-child{font-size:12px;font-weight:750}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden}.art{height:115px;display:grid;place-items:center;font-size:42px;background:linear-gradient(135deg,#dcebdc,#f2e9cf)}.card:nth-child(2) .art{background:linear-gradient(135deg,#f5dfc7,#f8eddf)}.card:nth-child(3) .art{background:linear-gradient(135deg,#d7e8ee,#f1e5d5)}.card-body{padding:15px}.tag{display:inline-block;font-size:11px;font-weight:800;color:#176b52;background:#e9f5e9;border-radius:99px;padding:5px 8px}.card h3{margin:9px 0 5px;font-size:17px}.card p{margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.45}.meta{font-size:12px;color:#506159;margin:7px 0}.card-actions{display:flex;gap:8px;margin-top:12px}.card-actions button{flex:1;font-size:12px;padding:10px 8px}
-.empty{padding:28px;text-align:center;color:var(--muted);background:white;border:1px dashed #cad6cc;border-radius:16px;grid-column:1/-1}
-.cta{margin-top:28px;background:#e6f0df;border-radius:22px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:16px}.cta h2{margin:0 0 6px;font-size:22px}.cta p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
-.modal-bg{position:fixed;inset:0;background:#0d211ccc;display:none;align-items:center;justify-content:center;padding:16px;z-index:10}.modal-bg.open{display:flex}.modal{background:white;border-radius:20px;padding:22px;width:min(540px,100%);max-height:92vh;overflow:auto}.modal h2{margin:0 0 6px}.modal .sub{color:var(--muted);font-size:13px;margin:0 0 18px}.field{display:block;margin:12px 0}.field span{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #d8e0d8;border-radius:11px;padding:12px;font:inherit;background:white}.field textarea{min-height:75px;resize:vertical}.modal-actions{display:flex;gap:8px;margin-top:18px}.modal-actions button{flex:1}
-nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:center;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));z-index:5}nav button{background:transparent;border:0;border-radius:12px;padding:9px 12px;color:var(--muted);font-size:12px;font-weight:750;cursor:pointer}nav button.active{background:#e8f3e8;color:var(--green)}
-@media(max-width:700px){.categories{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:1fr}.card{display:grid;grid-template-columns:105px 1fr}.art{height:100%;min-height:165px;font-size:34px}.card-body{padding:13px}.cta{align-items:flex-start;flex-direction:column}.search{flex-direction:column}.search .btn{width:100%}.section-head{align-items:flex-start;flex-direction:column}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#102c4a}
+.hero{position:relative;min-height:440px;color:white;overflow:hidden}
+.fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sombra{position:absolute;inset:0;background:linear-gradient(180deg,#062b4c44,#062b4c99)}
+nav,.conteudo{position:relative;z-index:1}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px;background:#ffffffed;color:#06335a}
+.logo{font-weight:bold;font-size:20px}
+.logo small{display:block;font-size:10px}
+nav a{color:#06335a;text-decoration:none;font-size:12px;font-weight:bold}
+.cadastro{background:#063b9e;color:white!important;padding:10px;border-radius:8px}
+.conteudo{text-align:center;padding:45px 15px 75px}
+h1{font-size:clamp(32px,6vw,55px);margin:0 0 10px;text-shadow:0 2px 8px #123}
+.conteudo p{line-height:1.5;text-shadow:0 2px 6px #123}
+.busca{display:flex;max-width:520px;margin:20px auto;background:white;padding:5px;border-radius:12px}
+.busca input{flex:1;min-width:0;border:0;padding:13px;font-size:14px}
+.busca button{background:#0878d1;color:white;border:0;border-radius:8px;padding:0 18px;font-weight:bold}
+main{max-width:1100px;margin:-35px auto 0;padding:0 15px;position:relative}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.card{padding:20px 14px;color:white;border-radius:14px;box-shadow:0 5px 18px #1233}
+.card h2{font-size:17px;margin:8px 0}
+.card p{font-size:12px;line-height:1.5}
+.azul{background:#0878d1}.laranja{background:#ed781a}.verde{background:#07885a}
+.titulo{display:flex;justify-content:space-between;margin:22px 2px 12px;font-weight:bold}
+.categorias{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.categoria{background:white;border-radius:12px;padding:14px 5px;text-align:center;font-size:12px;font-weight:bold}
+.categoria span{display:block;font-size:25px;margin-bottom:7px}
+.atalhos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.atalho{background:white;border-radius:12px;padding:16px;font-size:13px;font-weight:bold}
+.atalho p{font-weight:normal;font-size:12px}
+button{cursor:pointer}
+footer{text-align:center;padding:22px;color:#647789;font-size:12px}
+@media(max-width:650px){
+nav{flex-wrap:wrap}.links{display:flex;gap:10px;flex-wrap:wrap}
+.cards{grid-template-columns:1fr}.categorias{grid-template-columns:repeat(2,1fr)}
+.atalhos{grid-template-columns:1fr}.conteudo{padding-top:55px}
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="top"><div class="brand"><div class="logo">⌖</div><span>Salvador na Mão</span></div><span class="pill">BAHIA · GUIA LOCAL</span></div>
-  <div class="hero"><div class="eyebrow">A cidade na palma da mão</div><h1>Encontre o que precisa em Salvador.</h1><p>Comércios, profissionais, bares, oficinas e lugares especiais — tudo em um só lugar.</p>
-    <div class="search"><input id="searchInput" placeholder="Busque oficina, bar, bairro..." aria-label="Buscar"><button class="btn" onclick="searchNow()">Buscar lugares</button></div>
-  </div>
-</header>
-<main>
-  <div class="section-head"><div><h2>Explore por categoria</h2><p>Escolha o tipo de lugar que procura.</p></div></div>
-  <div class="categories" id="categories">
-    <button class="cat active" data-cat="Todos" onclick="setCategory('Todos')"><span class="emoji">✨</span><span>Todos</span></button>
-    <button class="cat" data-cat="Oficinas" onclick="setCategory('Oficinas')"><span class="emoji">🔧</span><span>Oficinas</span></button>
-    <button class="cat" data-cat="Bares e restaurantes" onclick="setCategory('Bares e restaurantes')"><span class="emoji">🍽️</span><span>Bares e restaurantes</span></button>
-    <button class="cat" data-cat="Beleza" onclick="setCategory('Beleza')"><span class="emoji">💈</span><span>Beleza</span></button>
-    <button class="cat" data-cat="Lojas" onclick="setCategory('Lojas')"><span class="emoji">🛍️</span><span>Lojas</span></button>
-    <button class="cat" data-cat="Turismo" onclick="setCategory('Turismo')"><span class="emoji">🌴</span><span>Turismo</span></button>
-  </div>
-  <div class="section-head"><div><h2 id="resultsTitle">Ideias para descobrir</h2><p>Exemplos demonstrativos — ainda não são anúncios verificados.</p></div><button class="btn secondary" onclick="openModal()">+ Cadastrar negócio</button></div>
-  <div class="cards" id="cards"></div>
-  <section class="cta"><div><h2>Tem um negócio em Salvador?</h2><p>Crie sua página, mostre seus serviços e facilite o contato com novos clientes.</p></div><button class="btn dark" onclick="openModal()">Criar minha página →</button></section>
-  <footer>Salvador na Mão · Protótipo inicial · Os dados cadastrados nesta demonstração ficam neste aparelho.</footer>
-</main>
-<nav><button class="active" onclick="navHome(this)">⌂ Início</button><button onclick="openModal()">＋ Meu negócio</button><button onclick="showAbout()">ⓘ Sobre</button></nav>
-<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
- <form class="modal" id="businessForm"><h2 id="modalTitle">Crie sua página</h2><p class="sub">Preencha os dados para ver como seu negócio aparece no guia. Esta versão é uma demonstração local.</p>
-  <label class="field"><span>Nome do negócio *</span><input name="name" required maxlength="70" placeholder="Ex.: Oficina do João"></label>
-  <label class="field"><span>Categoria *</span><select name="category" required><option value="">Selecione</option><option>Oficinas</option><option>Bares e restaurantes</option><option>Beleza</option><option>Lojas</option><option>Turismo</option><option>Serviços profissionais</option><option>Outros comércios</option></select></label>
-  <label class="field"><span>Bairro de Salvador *</span><input name="neighborhood" required placeholder="Ex.: Brotas, Itapuã, Centro"></label>
-  <label class="field"><span>WhatsApp com DDD</span><input name="phone" inputmode="tel" placeholder="Ex.: 71999999999"></label>
-  <label class="field"><span>O que você oferece?</span><textarea name="description" maxlength="240" placeholder="Descreva produtos, serviços, horários ou diferenciais."></textarea></label>
-  <div class="modal-actions"><button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn dark">Criar página</button></div>
- </form>
+<section class="hero">
+<svg class="fundo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 850" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="ceu" x2="0" y2="1"><stop stop-color="#42a9e6"/><stop offset="1" stop-color="#f8d5a0"/></linearGradient>
+<linearGradient id="mar" x2="0" y2="1"><stop stop-color="#16b3d6"/><stop offset="1" stop-color="#004c83"/></linearGradient>
+</defs>
+<rect width="1600" height="850" fill="url(#ceu)"/>
+<circle cx="1280" cy="130" r="65" fill="#fff0b0"/>
+<path d="M0 340 Q250 270 500 350 T1000 330 T1600 310 V850 H0Z" fill="#659b70"/>
+<rect y="450" width="1600" height="400" fill="url(#mar)"/>
+<path d="M0 500 Q250 470 500 505 T1000 495 T1600 490" fill="none" stroke="#b5edf5" stroke-width="5"/>
+<g stroke="#fff0d7" stroke-width="7">
+<rect x="30" y="330" width="145" height="210" fill="#e7a04b"/><path d="M20 330 L102 265 L185 330Z" fill="#b64e40"/>
+<rect x="180" y="290" width="150" height="250" fill="#f0d59a"/><path d="M170 290 L255 225 L340 290Z" fill="#39847e"/>
+<rect x="335" y="355" width="130" height="185" fill="#d16c51"/><path d="M325 355 L400 300 L475 355Z" fill="#efc86c"/>
+<rect x="470" y="310" width="150" height="230" fill="#f2c65d"/><path d="M460 310 L545 245 L630 310Z" fill="#b34d43"/>
+<rect x="625" y="370" width="125" height="170" fill="#79b8a1"/><path d="M615 370 L687 315 L760 370Z" fill="#ead5a5"/>
+</g>
+<g fill="#174d69" stroke="#fff2d6" stroke-width="5">
+<rect x="58" y="365" width="30" height="43"/><rect x="115" y="365" width="30" height="43"/>
+<rect x="210" y="326" width="32" height="45"/><rect x="270" y="326" width="32" height="45"/>
+<rect x="358" y="390" width="28" height="42"/><rect x="410" y="390" width="28" height="42"/>
+<rect x="505" y="347" width="31" height="45"/><rect x="565" y="347" width="31" height="45"/>
+</g>
+<g><rect x="1120" y="205" width="100" height="290" fill="#eee8d7"/><rect x="1140" y="225" width="60" height="245" fill="#d5cbb6"/><rect x="1152" y="240" width="36" height="230" fill="#fff9e9"/><rect x="1098" y="190" width="145" height="28" fill="#fff4df"/></g>
+<g fill="#f4e8d3" stroke="#fff6e5" stroke-width="5"><rect x="1350" y="350" width="160" height="150"/><path d="M1360 350 L1390 280 L1420 350Z" fill="#d6c5a6"/><path d="M1440 350 L1475 270 L1510 350Z" fill="#d6c5a6"/><rect x="1380" y="390" width="28" height="45" fill="#355b75"/><rect x="1455" y="390" width="28" height="45" fill="#355b75"/></g>
+</svg>
+<div class="sombra"></div>
+<nav>
+<div class="logo">🌴 SALVADOR NA MÃO<small>TUDO SOBRE SALVADOR EM UM SÓ LUGAR</small></div>
+<div class="links"><a href="#">Início</a><a href="#sobre">Sobre</a><a href="#ajuda">Ajuda</a><a href="#entrar">Entrar</a><a class="cadastro" href="#cadastro">Cadastre sua loja</a></div>
+</nav>
+<div class="conteudo">
+<h1>Salvador na Mão</h1>
+<p>Comércios, serviços, lazer e informações da cidade.<br>Tudo sobre Salvador em um só lugar.</p>
+<form class="busca" onsubmit="event.preventDefault();alert('A pesquisa será ativada na próxima etapa.');">
+<input type="search" placeholder="⌕ O que você procura em Salvador?">
+<button type="submit">Buscar</button>
+</form>
 </div>
-<script>
-const samples=[
-{id:1,name:"Oficina Exemplo",category:"Oficinas",neighborhood:"Brotas",description:"Manutenção geral, revisão e diagnóstico automotivo.",phone:"",emoji:"🔧"},
-{id:2,name:"Bar do Bairro (exemplo)",category:"Bares e restaurantes",neighborhood:"Rio Vermelho",description:"Petiscos, bebidas e encontro com amigos.",phone:"",emoji:"🍻"},
-{id:3,name:"Beleza & Estilo (exemplo)",category:"Beleza",neighborhood:"Pituba",description:"Cuidado pessoal e atendimento com hora marcada.",phone:"",emoji:"✂️"}
-];
-let businesses=[...samples], activeCategory="Todos", query="";
-function render(){
- const filtered=businesses.filter(b=>(activeCategory==="Todos"||b.category===activeCategory)&&(`${b.name} ${b.category} ${b.neighborhood} ${b.description}`.toLowerCase().includes(query.toLowerCase())));
- document.getElementById("resultsTitle").textContent=query?`Resultados para “${query}”`:activeCategory==="Todos"?"Ideias para descobrir":activeCategory;
- const el=document.getElementById("cards");
- if(!filtered.length){el.innerHTML='<div class="empty">Não encontramos resultados. Experimente outra busca ou cadastre um negócio.</div>';return}
- el.innerHTML=filtered.map(b=>`<article class="card"><div class="art">${escapeHtml(b.emoji||"📍")}</div><div class="card-body"><span class="tag">${escapeHtml(b.category)}</span><h3>${escapeHtml(b.name)}</h3><div class="meta">📍 ${escapeHtml(b.neighborhood)}, Salvador</div><p>${escapeHtml(b.description||"Conheça este negócio e entre em contato para saber mais.")}</p><div class="card-actions">${b.phone?`<button class="btn dark" onclick="whatsapp('${escapeAttr(b.phone)}')">WhatsApp</button>`:""}<button class="btn secondary" onclick="mapSearch('${escapeAttr(b.name+" "+b.neighborhood+" Salvador BA")}')">Ver no mapa</button></div></div></article>`).join("");
-}
-function escapeHtml(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function escapeAttr(s){return String(s||"").replace(/['\\]/g,"")}
-function setCategory(c){activeCategory=c;query="";document.getElementById("searchInput").value="";document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x.dataset.cat===c));render()}
-function searchNow(){query=document.getElementById("searchInput").value.trim();activeCategory="Todos";document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x.dataset.cat==="Todos"));render()}
-document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")searchNow()});
-function openModal(){document.getElementById("modalBg").classList.add("open")}
-function closeModal(){document.getElementById("modalBg").classList.remove("open")}
-document.getElementById("modalBg").addEventListener("click",e=>{if(e.target.id==="modalBg")closeModal()});
-document.getElementById("businessForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target);const cats={"Oficinas":"🔧","Bares e restaurantes":"🍽️","Beleza":"💈","Lojas":"🛍️","Turismo":"🌴","Serviços profissionais":"🧰","Outros comércios":"🏪"};businesses.unshift({id:Date.now(),name:f.get("name").trim(),category:f.get("category"),neighborhood:f.get("neighborhood").trim(),phone:f.get("phone").replace(/\D/g,""),description:f.get("description").trim(),emoji:cats[f.get("category")]||"📍"});activeCategory="Todos";query="";document.getElementById("searchInput").value="";document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x.dataset.cat==="Todos"));render();e.target.reset();closeModal();document.getElementById("resultsTitle").textContent="Sua página foi adicionada neste protótipo";window.scrollTo({top:500,behavior:"smooth"})});
-function whatsapp(p){if(p.length<10){alert("Confira se o WhatsApp inclui DDD e número.");return}window.open("https://wa.me/55"+p,"_blank","noopener")}
-function mapSearch(q){window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q),"_blank","noopener")}
-function navHome(btn){document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
-function showAbout(){alert("Salvador na Mão é um protótipo para explorar comércios e serviços de Salvador. Os exemplos não são empresas verificadas. Nesta versão, os cadastros ficam apenas nesta sessão e neste aparelho; ainda falta conectar um servidor e banco de dados.");}
-render();
-</script>
-</body></html>
+</section>
+<main>
+<section class="cards">
+<div class="card azul"><div style="font-size:28px">🏛️</div><h2>Serviços Públicos</h2><p>Hospitais, escolas, delegacias, órgãos da prefeitura e mais.</p></div>
+<div class="card laranja"><div style="font-size:28px">🏪</div><h2>Comércios e Serviços</h2><p>Oficinas, bares, restaurantes, lojas, salões de beleza e mais.</p></div>
+<div class="card verde"><div style="font-size:28px">🌴</div><h2>Turismo e Lazer</h2><p>Praias, passeios, hotéis, parques, cultura e eventos.</p></div>
+</section>
+<div class="titulo">Categorias em destaque <span>Ver todas ›</span></div>
+<section class="categorias">
+<div class="categoria"><span>🍴</span>Restaurantes</div>
+<div class="categoria"><span>🍺</span>Bares</div>
+<div class="categoria"><span>🛏️</span>Hotéis e pousadas</div>
+<div class="categoria"><span>🔧</span>Oficinas</div>
+<div class="categoria"><span>✂️</span>Beleza e estética</div>
+<div class="categoria"><span>✚</span>Saúde</div>
+<div class="categoria"><span>⛽</span>Postos de gasolina</div>
+<div class="categoria"><span>🛒</span>Supermercados</div>
+</section>
+<section class="atalhos">
+<div class="atalho">📍 Ver no mapa<p>Encontre locais perto de você.</p></div>
+<div class="atalho">➤ Rotas e localização<p>Veja como chegar ao seu destino.</p></div>
+<div class="atalho" id="cadastro">🏬 Quer divulgar seu negócio?<p>Cadastre sua loja no Salvador na Mão.</p></div>
+</section>
+</main>
+<footer id="sobre">Salvador na Mão • Protótipo visual em desenvolvimento</footer>
+</body>
+</html>
