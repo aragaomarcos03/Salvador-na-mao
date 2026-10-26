@@ -6,109 +6,149 @@
 <title>Salvador na Mão</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#102c4a}
-.hero{position:relative;min-height:440px;color:white;overflow:hidden}
-.fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sombra{position:absolute;inset:0;background:linear-gradient(180deg,#062b4c44,#062b4c99)}
-nav,.conteudo{position:relative;z-index:1}
-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px;background:#ffffffed;color:#06335a}
-.logo{font-weight:bold;font-size:20px}
-.logo small{display:block;font-size:10px}
-nav a{color:#06335a;text-decoration:none;font-size:12px;font-weight:bold}
-.cadastro{background:#063b9e;color:white!important;padding:10px;border-radius:8px}
-.conteudo{text-align:center;padding:45px 15px 75px}
-h1{font-size:clamp(32px,6vw,55px);margin:0 0 10px;text-shadow:0 2px 8px #123}
-.conteudo p{line-height:1.5;text-shadow:0 2px 6px #123}
-.busca{display:flex;max-width:520px;margin:20px auto;background:white;padding:5px;border-radius:12px}
-.busca input{flex:1;min-width:0;border:0;padding:13px;font-size:14px}
-.busca button{background:#0878d1;color:white;border:0;border-radius:8px;padding:0 18px;font-weight:bold}
-main{max-width:1100px;margin:-35px auto 0;padding:0 15px;position:relative}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fa;color:#16324d}
+header{background:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 2px 10px #0001}
+.logo{font-size:20px;font-weight:bold;color:#073d70}
+.logo small{display:block;font-size:10px;margin-top:5px}
+.hero{background:linear-gradient(135deg,#075985dd,#06345ddd),linear-gradient(#1687ad,#06436c);color:white;text-align:center;padding:45px 16px 65px}
+.hero h1{font-size:clamp(30px,6vw,48px);margin:0 0 12px}
+.hero p{line-height:1.5}
+.search{display:flex;max-width:520px;margin:20px auto 0;background:white;padding:5px;border-radius:10px}
+.search input{flex:1;min-width:0;border:0;padding:12px;font-size:15px}
+.search button{background:#0878d1;color:white;border:0;border-radius:7px;padding:0 16px;font-weight:bold}
+main{max-width:1050px;margin:-25px auto 0;padding:0 15px 35px;position:relative}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
-.card{padding:20px 14px;color:white;border-radius:14px;box-shadow:0 5px 18px #1233}
-.card h2{font-size:17px;margin:8px 0}
-.card p{font-size:12px;line-height:1.5}
-.azul{background:#0878d1}.laranja{background:#ed781a}.verde{background:#07885a}
-.titulo{display:flex;justify-content:space-between;margin:22px 2px 12px;font-weight:bold}
-.categorias{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.categoria{background:white;border-radius:12px;padding:14px 5px;text-align:center;font-size:12px;font-weight:bold}
-.categoria span{display:block;font-size:25px;margin-bottom:7px}
-.atalhos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
-.atalho{background:white;border-radius:12px;padding:16px;font-size:13px;font-weight:bold}
-.atalho p{font-weight:normal;font-size:12px}
-button{cursor:pointer}
-footer{text-align:center;padding:22px;color:#647789;font-size:12px}
-@media(max-width:650px){
-nav{flex-wrap:wrap}.links{display:flex;gap:10px;flex-wrap:wrap}
-.cards{grid-template-columns:1fr}.categorias{grid-template-columns:repeat(2,1fr)}
-.atalhos{grid-template-columns:1fr}.conteudo{padding-top:55px}
-}
+.card{border:0;border-radius:14px;padding:20px 15px;color:white;text-align:left;cursor:pointer;box-shadow:0 5px 15px #0002;min-height:145px}
+.card strong{display:block;font-size:18px;margin:10px 0}
+.card p{font-size:13px;line-height:1.5;margin:0}
+.blue{background:#0878d1}.orange{background:#ed781a}.green{background:#07885a}
+.icon{font-size:30px}
+.panel{display:none;background:white;border-radius:14px;margin-top:22px;padding:20px;box-shadow:0 4px 18px #0001}
+.panel h2{margin-top:0;color:#073d70}
+.back{background:#e8f1fa;color:#073d70;border:0;padding:10px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-bottom:15px}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.service{display:block;background:#f4f8fc;border:1px solid #dbe7f1;border-radius:12px;padding:17px;text-decoration:none;color:#123a5c}
+.service span{font-size:27px;display:block;margin-bottom:8px}
+.service strong{display:block;margin-bottom:6px}
+.service small{color:#526a7e;line-height:1.4}
+.note{font-size:12px;color:#63778a;line-height:1.5;margin-top:16px}
+.categories{margin-top:28px}
+.categories h2{font-size:19px}
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.category{background:white;padding:14px 8px;border-radius:10px;text-align:center;font-size:13px;font-weight:bold}
+footer{text-align:center;color:#687d8e;font-size:12px;padding:20px}
+@media(max-width:650px){.cards{grid-template-columns:1fr}.card{min-height:auto}.services{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
+<header>
+  <div class="logo">🌴 SALVADOR NA MÃO<small>TUDO SOBRE SALVADOR EM UM SÓ LUGAR</small></div>
+</header>
+
 <section class="hero">
-<svg class="fundo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 850" preserveAspectRatio="xMidYMid slice">
-<defs>
-<linearGradient id="ceu" x2="0" y2="1"><stop stop-color="#42a9e6"/><stop offset="1" stop-color="#f8d5a0"/></linearGradient>
-<linearGradient id="mar" x2="0" y2="1"><stop stop-color="#16b3d6"/><stop offset="1" stop-color="#004c83"/></linearGradient>
-</defs>
-<rect width="1600" height="850" fill="url(#ceu)"/>
-<circle cx="1280" cy="130" r="65" fill="#fff0b0"/>
-<path d="M0 340 Q250 270 500 350 T1000 330 T1600 310 V850 H0Z" fill="#659b70"/>
-<rect y="450" width="1600" height="400" fill="url(#mar)"/>
-<path d="M0 500 Q250 470 500 505 T1000 495 T1600 490" fill="none" stroke="#b5edf5" stroke-width="5"/>
-<g stroke="#fff0d7" stroke-width="7">
-<rect x="30" y="330" width="145" height="210" fill="#e7a04b"/><path d="M20 330 L102 265 L185 330Z" fill="#b64e40"/>
-<rect x="180" y="290" width="150" height="250" fill="#f0d59a"/><path d="M170 290 L255 225 L340 290Z" fill="#39847e"/>
-<rect x="335" y="355" width="130" height="185" fill="#d16c51"/><path d="M325 355 L400 300 L475 355Z" fill="#efc86c"/>
-<rect x="470" y="310" width="150" height="230" fill="#f2c65d"/><path d="M460 310 L545 245 L630 310Z" fill="#b34d43"/>
-<rect x="625" y="370" width="125" height="170" fill="#79b8a1"/><path d="M615 370 L687 315 L760 370Z" fill="#ead5a5"/>
-</g>
-<g fill="#174d69" stroke="#fff2d6" stroke-width="5">
-<rect x="58" y="365" width="30" height="43"/><rect x="115" y="365" width="30" height="43"/>
-<rect x="210" y="326" width="32" height="45"/><rect x="270" y="326" width="32" height="45"/>
-<rect x="358" y="390" width="28" height="42"/><rect x="410" y="390" width="28" height="42"/>
-<rect x="505" y="347" width="31" height="45"/><rect x="565" y="347" width="31" height="45"/>
-</g>
-<g><rect x="1120" y="205" width="100" height="290" fill="#eee8d7"/><rect x="1140" y="225" width="60" height="245" fill="#d5cbb6"/><rect x="1152" y="240" width="36" height="230" fill="#fff9e9"/><rect x="1098" y="190" width="145" height="28" fill="#fff4df"/></g>
-<g fill="#f4e8d3" stroke="#fff6e5" stroke-width="5"><rect x="1350" y="350" width="160" height="150"/><path d="M1360 350 L1390 280 L1420 350Z" fill="#d6c5a6"/><path d="M1440 350 L1475 270 L1510 350Z" fill="#d6c5a6"/><rect x="1380" y="390" width="28" height="45" fill="#355b75"/><rect x="1455" y="390" width="28" height="45" fill="#355b75"/></g>
-</svg>
-<div class="sombra"></div>
-<nav>
-<div class="logo">🌴 SALVADOR NA MÃO<small>TUDO SOBRE SALVADOR EM UM SÓ LUGAR</small></div>
-<div class="links"><a href="#">Início</a><a href="#sobre">Sobre</a><a href="#ajuda">Ajuda</a><a href="#entrar">Entrar</a><a class="cadastro" href="#cadastro">Cadastre sua loja</a></div>
-</nav>
-<div class="conteudo">
-<h1>Salvador na Mão</h1>
-<p>Comércios, serviços, lazer e informações da cidade.<br>Tudo sobre Salvador em um só lugar.</p>
-<form class="busca" onsubmit="event.preventDefault();alert('A pesquisa será ativada na próxima etapa.');">
-<input type="search" placeholder="⌕ O que você procura em Salvador?">
-<button type="submit">Buscar</button>
-</form>
-</div>
+  <h1>Salvador na Mão</h1>
+  <p>Comércios, serviços, lazer e informações da cidade.<br>Tudo sobre Salvador em um só lugar.</p>
+  <form class="search" onsubmit="event.preventDefault();buscar();">
+    <input id="pesquisa" type="search" placeholder="O que você procura em Salvador?">
+    <button type="submit">Buscar</button>
+  </form>
 </section>
+
 <main>
-<section class="cards">
-<div class="card azul"><div style="font-size:28px">🏛️</div><h2>Serviços Públicos</h2><p>Hospitais, escolas, delegacias, órgãos da prefeitura e mais.</p></div>
-<div class="card laranja"><div style="font-size:28px">🏪</div><h2>Comércios e Serviços</h2><p>Oficinas, bares, restaurantes, lojas, salões de beleza e mais.</p></div>
-<div class="card verde"><div style="font-size:28px">🌴</div><h2>Turismo e Lazer</h2><p>Praias, passeios, hotéis, parques, cultura e eventos.</p></div>
-</section>
-<div class="titulo">Categorias em destaque <span>Ver todas ›</span></div>
-<section class="categorias">
-<div class="categoria"><span>🍴</span>Restaurantes</div>
-<div class="categoria"><span>🍺</span>Bares</div>
-<div class="categoria"><span>🛏️</span>Hotéis e pousadas</div>
-<div class="categoria"><span>🔧</span>Oficinas</div>
-<div class="categoria"><span>✂️</span>Beleza e estética</div>
-<div class="categoria"><span>✚</span>Saúde</div>
-<div class="categoria"><span>⛽</span>Postos de gasolina</div>
-<div class="categoria"><span>🛒</span>Supermercados</div>
-</section>
-<section class="atalhos">
-<div class="atalho">📍 Ver no mapa<p>Encontre locais perto de você.</p></div>
-<div class="atalho">➤ Rotas e localização<p>Veja como chegar ao seu destino.</p></div>
-<div class="atalho" id="cadastro">🏬 Quer divulgar seu negócio?<p>Cadastre sua loja no Salvador na Mão.</p></div>
-</section>
+  <section class="cards" id="inicio">
+    <button class="card blue" onclick="abrirPublicos()">
+      <span class="icon">🏛️</span>
+      <strong>Serviços Públicos</strong>
+      <p>Hospitais, postos de saúde, escolas, delegacias e órgãos públicos.</p>
+    </button>
+    <button class="card orange" onclick="alert('Comércios e Serviços será ativado depois da sua aprovação.')">
+      <span class="icon">🏪</span>
+      <strong>Comércios e Serviços</strong>
+      <p>Lojas, oficinas, restaurantes, salões e negócios cadastrados.</p>
+    </button>
+    <button class="card green" onclick="alert('Turismo e Lazer será ativado depois da sua aprovação.')">
+      <span class="icon">🌴</span>
+      <strong>Turismo e Lazer</strong>
+      <p>Praias, passeios, hotéis, cultura e atrações da cidade.</p>
+    </button>
+  </section>
+
+  <section class="panel" id="publicos">
+    <button class="back" onclick="voltar()">← Voltar ao início</button>
+    <h2>Serviços Públicos de Salvador</h2>
+    <p>Escolha uma categoria para ver locais no mapa ou consultar serviços oficiais.</p>
+
+    <div class="services">
+      <a class="service" href="https://www.google.com/maps/search/postos+de+sa%C3%BAde+em+Salvador+BA" target="_blank" rel="noopener">
+        <span>🩺</span><strong>Postos de saúde</strong><small>Ver unidades de saúde no mapa</small>
+      </a>
+      <a class="service" href="https://www.google.com/maps/search/hospitais+p%C3%BAblicos+em+Salvador+BA" target="_blank" rel="noopener">
+        <span>🏥</span><strong>Hospitais públicos</strong><small>Ver hospitais no mapa</small>
+      </a>
+      <a class="service" href="https://www.google.com/maps/search/escolas+p%C3%BAblicas+em+Salvador+BA" target="_blank" rel="noopener">
+        <span>🏫</span><strong>Escolas públicas</strong><small>Ver escolas no mapa</small>
+      </a>
+      <a class="service" href="https://www.google.com/maps/search/delegacias+em+Salvador+BA" target="_blank" rel="noopener">
+        <span>🚔</span><strong>Delegacias</strong><small>Ver delegacias no mapa</small>
+      </a>
+      <a class="service" href="https://www.google.com/maps/search/CRAS+em+Salvador+BA" target="_blank" rel="noopener">
+        <span>🤝</span><strong>CRAS e assistência social</strong><small>Ver unidades no mapa</small>
+      </a>
+      <a class="service" href="https://www.google.com/maps/search/Corpo+de+Bombeiros+em+Salvador+BA" target="_blank" rel="noopener">
+        <span>🚒</span><strong>Corpo de Bombeiros</strong><small>Ver unidades no mapa</small>
+      </a>
+      <a class="service" href="https://www.salvador.ba.gov.br/" target="_blank" rel="noopener">
+        <span>🏛️</span><strong>Prefeitura de Salvador</strong><small>Acessar o portal municipal</small>
+      </a>
+      <a class="service" href="https://www.ba.gov.br/" target="_blank" rel="noopener">
+        <span>📄</span><strong>Serviços do Governo da Bahia</strong><small>Acessar o portal estadual</small>
+      </a>
+      <a class="service" href="https://www.gov.br/" target="_blank" rel="noopener">
+        <span>🇧🇷</span><strong>Serviços federais</strong><small>Acessar o portal do Governo Federal</small>
+      </a>
+    </div>
+    <p class="note">Os mapas mostram resultados de pesquisa do Google Maps; confirme endereço, horário e atendimento antes de se deslocar. Em emergências, ligue 190 (Polícia), 192 (SAMU) ou 193 (Bombeiros).</p>
+  </section>
+
+  <section class="categories" id="categorias">
+    <h2>Categorias em destaque</h2>
+    <div class="category-grid">
+      <div class="category">🍴 Restaurantes</div>
+      <div class="category">🍺 Bares</div>
+      <div class="category">🛏️ Hotéis e pousadas</div>
+      <div class="category">🔧 Oficinas</div>
+      <div class="category">✂️ Beleza e estética</div>
+      <div class="category">✚ Saúde</div>
+      <div class="category">⛽ Postos de gasolina</div>
+      <div class="category">🛒 Supermercados</div>
+    </div>
+  </section>
 </main>
-<footer id="sobre">Salvador na Mão • Protótipo visual em desenvolvimento</footer>
+
+<footer>Salvador na Mão • Protótipo em desenvolvimento</footer>
+
+<script>
+function abrirPublicos(){
+  document.getElementById('inicio').style.display='none';
+  document.getElementById('categorias').style.display='none';
+  document.getElementById('publicos').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function voltar(){
+  document.getElementById('publicos').style.display='none';
+  document.getElementById('inicio').style.display='grid';
+  document.getElementById('categorias').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function buscar(){
+  const termo=document.getElementById('pesquisa').value.trim().toLowerCase();
+  if(!termo){alert('Digite o que você procura.');return;}
+  if(/posto|hospital|sa[uú]de|escola|delegacia|bombeiro|cras|prefeitura|p[uú]blico/.test(termo)){
+    abrirPublicos();
+  }else{
+    alert('Por enquanto, a busca está disponível para Serviços Públicos. As outras categorias serão ativadas depois da sua aprovação.');
+  }
+}
+</script>
 </body>
 </html>
