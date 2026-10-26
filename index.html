@@ -9,14 +9,14 @@
 *{box-sizing:border-box}
 :root{--blue:#0878d1;--navy:#073d70;--green:#07885a;--orange:#ed781a;--bg:#f3f6fa;--text:#16324d}
 body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-header{background:#fff;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 2px 10px #0001}
+header{background:#fff;padding:16px 18px;display:flex;align-items:center;box-shadow:0 2px 10px #0001}
 .logo{font-size:20px;font-weight:bold;color:var(--navy)}
-.logo small{display:block;font-size:10px;margin-top:5px;letter-spacing:.4px}
-.hero{background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.55)),url('https://commons.wikimedia.org/wiki/Special:FilePath/Elevador_Lacerda_com_Baia_de_Todos_os_Santos.jpg') center/cover no-repeat;color:white;text-align:center;padding:45px 16px 65px}
+.logo small{display:block;font-size:10px;margin-top:5px}
+.hero{background:linear-gradient(#0005,#0009),url('https://commons.wikimedia.org/wiki/Special:FilePath/Elevador_Lacerda_com_Baia_de_Todos_os_Santos.jpg') center/cover no-repeat;color:white;text-align:center;padding:45px 16px 65px}
 .hero h1{font-size:clamp(30px,6vw,48px);margin:0 0 12px}
 .hero p{line-height:1.5}
 .search{display:flex;max-width:560px;margin:20px auto 0;background:white;padding:5px;border-radius:10px}
-.search input{flex:1;min-width:0;border:0;padding:12px;font-size:15px;outline:none}
+.search input{flex:1;min-width:0;border:0;padding:12px;font-size:15px}
 .search button,.primary{background:var(--blue);color:white;border:0;border-radius:7px;padding:12px 16px;font-weight:bold;cursor:pointer}
 main{max-width:1050px;margin:-25px auto 0;padding:0 15px 35px;position:relative}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
@@ -29,7 +29,7 @@ main{max-width:1050px;margin:-25px auto 0;padding:0 15px 35px;position:relative}
 .panel h2{margin-top:0;color:var(--navy)}
 .back{background:#e8f1fa;color:var(--navy);border:0;padding:10px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-bottom:15px}
 .services{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.service{display:block;background:#f4f8fc;border:1px solid #dbe7f1;border-radius:12px;padding:17px;text-decoration:none;color:#123a5c;cursor:pointer}
+.service{display:block;background:#f4f8fc;border:1px solid #dbe7f1;border-radius:12px;padding:17px;text-decoration:none;color:#123a5c}
 .service span{font-size:27px;display:block;margin-bottom:8px}
 .service strong{display:block;margin-bottom:6px}
 .service small{color:#526a7e;line-height:1.4}
@@ -42,16 +42,21 @@ main{max-width:1050px;margin:-25px auto 0;padding:0 15px 35px;position:relative}
 .field{display:flex;flex-direction:column;gap:6px}
 .field.full{grid-column:1/-1}
 label{font-weight:bold;font-size:13px}
-input,textarea,select{font:inherit;padding:11px;border:1px solid #cbd8e4;border-radius:8px;width:100%;background:#fff;color:var(--text)}
+input,textarea,select{font:inherit;padding:11px;border:1px solid #cbd8e4;border-radius:8px;width:100%;background:white;color:var(--text)}
 textarea{min-height:95px;resize:vertical}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .secondary{background:#e8f1fa;color:var(--navy);border:0;border-radius:7px;padding:12px 16px;font-weight:bold;cursor:pointer}
 .status{padding:12px;border-radius:8px;background:#fff6df;color:#6b4a00;line-height:1.45;margin:12px 0}
 .business-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
-.business-item{border:1px solid #dbe7f1;border-radius:12px;padding:14px;background:#fff}
+.business-item{border:1px solid #dbe7f1;border-radius:12px;padding:14px;background:white}
 .business-item h3{margin:0 0 8px;color:var(--navy)}
 .business-item p{line-height:1.45;overflow-wrap:anywhere}
-.business-item img{max-width:100%;max-height:180px;object-fit:cover;border-radius:8px}
+.business-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.business-actions a,.business-actions button{display:inline-block;text-decoration:none;border:0;border-radius:7px;padding:10px 12px;font-weight:bold;font-size:13px;cursor:pointer}
+.map-link{background:#0878d1;color:white}
+.approve-btn{background:#07885a;color:white}
+.reject-btn{background:#fff0df;color:#8a4b00}
+#empresasPublicadas{margin-top:24px}
 footer{text-align:center;color:#687d8e;font-size:12px;padding:20px}
 @media(max-width:650px){
 .cards{grid-template-columns:1fr}
@@ -64,396 +69,482 @@ footer{text-align:center;color:#687d8e;font-size:12px;padding:20px}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="logo">🌴 SALVADOR NA MÃO
-    <small>TUDO SOBRE SALVADOR EM UM SÓ LUGAR</small>
-  </div>
+<div class="logo">🌴 SALVADOR NA MÃO
+<small>TUDO SOBRE SALVADOR EM UM SÓ LUGAR</small>
+</div>
 </header>
-
 <section class="hero">
-  <h1>Salvador na Mão</h1>
-  <p>Comércios, serviços, lazer e informações da cidade.<br>Tudo sobre Salvador em um só lugar.</p>
-  <form class="search" onsubmit="event.preventDefault();buscar()">
-    <input id="pesquisa" type="search" placeholder="O que você procura em Salvador?" aria-label="Pesquisar">
-    <button type="submit">Buscar</button>
+<h1>Salvador na Mão</h1>
+<p>Comércios, serviços, lazer e informações da cidade.<br>Tudo sobre Salvador em um só lugar.</p>
+<form class="search" onsubmit="event.preventDefault();buscar()">
+<input id="pesquisa" type="search" placeholder="O que você procura em Salvador?" aria-label="Pesquisar">
+<button type="submit">Buscar</button>
+</form>
+</section>
+<main>
+<section class="cards" id="inicio">
+<button class="card blue" onclick="abrir('publicos')">
+<span class="icon">🏛️</span><strong>Serviços Públicos</strong>
+<p>Hospitais, postos de saúde, escolas, delegacias e órgãos públicos.</p>
+</button>
+<button class="card orange" onclick="abrir('comercios')">
+<span class="icon">🏪</span><strong>Comércios e Serviços</strong>
+<p>Lojas, oficinas, restaurantes, salões e empresas cadastradas.</p>
+</button>
+<button class="card green" onclick="abrir('turismo')">
+<span class="icon">🌴</span><strong>Turismo e Lazer</strong>
+<p>Praias, passeios, hotéis, clubes, cultura e atrações da cidade.</p>
+</button>
+</section>
+<section class="panel" id="publicos">
+<button class="back" onclick="voltar()">← Voltar ao início</button>
+<h2>Serviços Públicos de Salvador</h2>
+<p>Escolha uma categoria para ver locais no mapa ou consultar serviços oficiais.</p>
+<div class="services">
+<a class="service" href="https://www.google.com/maps/search/postos+de+sa%C3%BAde+em+Salvador+BA" target="_blank" rel="noopener"><span>🩺</span><strong>Postos de saúde</strong><small>Ver unidades no mapa</small></a>
+<a class="service" href="https://www.google.com/maps/search/hospitais+p%C3%BAblicos+em+Salvador+BA" target="_blank" rel="noopener"><span>🏥</span><strong>Hospitais públicos</strong><small>Ver hospitais no mapa</small></a>
+<a class="service" href="https://www.google.com/maps/search/escolas+p%C3%BAblicas+em+Salvador+BA" target="_blank" rel="noopener"><span>🏫</span><strong>Escolas públicas</strong><small>Ver escolas no mapa</small></a>
+<a class="service" href="https://www.google.com/maps/search/delegacias+em+Salvador+BA" target="_blank" rel="noopener"><span>🚔</span><strong>Delegacias</strong><small>Ver delegacias no mapa</small></a>
+<a class="service" href="https://www.google.com/maps/search/CRAS+em+Salvador+BA" target="_blank" rel="noopener"><span>🤝</span><strong>CRAS e assistência social</strong><small>Ver unidades no mapa</small></a>
+<a class="service" href="https://www.google.com/maps/search/Corpo+de+Bombeiros+em+Salvador+BA" target="_blank" rel="noopener"><span>🚒</span><strong>Corpo de Bombeiros</strong><small>Ver unidades no mapa</small></a>
+<a class="service" href="https://www.salvador.ba.gov.br/" target="_blank" rel="noopener"><span>🏛️</span><strong>Prefeitura de Salvador</strong><small>Portal municipal</small></a>
+<a class="service" href="https://www.ba.gov.br/" target="_blank" rel="noopener"><span>📄</span><strong>Governo da Bahia</strong><small>Portal estadual</small></a>
+<a class="service" href="https://www.gov.br/" target="_blank" rel="noopener"><span>🇧🇷</span><strong>Serviços federais</strong><small>Portal federal</small></a>
+</div>
+<p class="note">Confirme endereço, horário e atendimento antes de se deslocar. Emergências: 190 (Polícia), 192 (SAMU) ou 193 (Bombeiros).</p>
+</section>
+<section id="turismo" class="painel">
+  <button class="voltar" onclick="voltar()">← Voltar</button>
+  <h2>Turismo em Salvador</h2>
+  <p>Encontre serviços e lugares para conhecer na cidade.</p>
+  <div class="categorias">
+    <button onclick="prepararCadastro('Hotéis e pousadas')">Hotéis e pousadas</button>
+    <button onclick="prepararCadastro('Restaurantes e bares')">Restaurantes e bares</button>
+    <button onclick="prepararCadastro('Praias')">Praias</button>
+    <button onclick="prepararCadastro('Passeios e tours')">Passeios e tours</button>
+    <button onclick="prepararCadastro('Cultura e história')">Cultura e história</button>
+    <button onclick="prepararCadastro('Casas de shows e clubes')">Casas de shows e clubes</button>
+    <button onclick="prepararCadastro('Parques e lazer')">Parques e lazer</button>
+    <button onclick="prepararCadastro('Aluguel por temporada')">Aluguel por temporada</button>
+    <button onclick="prepararCadastro('Transporte turístico')">Transporte turístico</button>
+  </div>
+  <button class="principal" onclick="abrir('anuncios')">Ver locais cadastrados</button>
+  <button class="principal" onclick="prepararCadastro('Turismo')">Cadastrar serviço turístico</button>
+</section>
+
+<section id="comercios" class="painel">
+  <button class="voltar" onclick="voltar()">← Voltar</button>
+  <h2>Comércio e serviços</h2>
+  <p>Encontre empresas, profissionais e estabelecimentos.</p>
+  <div class="categorias">
+    <button onclick="prepararCadastro('Oficinas')">Oficinas</button>
+    <button onclick="prepararCadastro('Beleza')">Beleza</button>
+    <button onclick="prepararCadastro('Lojas')">Lojas</button>
+    <button onclick="prepararCadastro('Restaurantes e bares')">Restaurantes e bares</button>
+    <button onclick="prepararCadastro('Serviços em geral')">Serviços em geral</button>
+    <button onclick="prepararCadastro('Transporte')">Transporte</button>
+  </div>
+  <button class="principal" onclick="abrir('anuncios')">Ver estabelecimentos cadastrados</button>
+  <button class="principal" onclick="prepararCadastro('Comércio e serviços')">Cadastrar estabelecimento</button>
+</section>
+
+<section id="cadastro" class="painel">
+  <button class="voltar" onclick="voltar()">← Voltar</button>
+  <h2>Cadastrar estabelecimento ou serviço</h2>
+  <p>Preencha os dados. O cadastro ficará aguardando aprovação do administrador.</p>
+
+  <form id="formCadastro">
+    <label for="nome">Nome do estabelecimento ou serviço *</label>
+    <input id="nome" name="nome" required maxlength="100" placeholder="Nome do negócio">
+
+    <label for="categoria">Categoria *</label>
+    <select id="categoria" name="categoria" required>
+      <option value="">Selecione uma categoria</option>
+      <option>Hotéis e pousadas</option>
+      <option>Restaurantes e bares</option>
+      <option>Praias</option>
+      <option>Passeios e tours</option>
+      <option>Cultura e história</option>
+      <option>Casas de shows e clubes</option>
+      <option>Parques e lazer</option>
+      <option>Aluguel por temporada</option>
+      <option>Transporte turístico</option>
+      <option>Oficinas</option>
+      <option>Beleza</option>
+      <option>Lojas</option>
+      <option>Serviços em geral</option>
+      <option>Transporte</option>
+      <option>Comércio e serviços</option>
+      <option>Turismo</option>
+    </select>
+
+    <label for="responsavel">Nome do responsável *</label>
+    <input id="responsavel" name="responsavel" required maxlength="100">
+
+    <label for="endereco">Endereço completo *</label>
+    <input id="endereco" name="endereco" required maxlength="200"
+      placeholder="Rua, número, bairro, Salvador - BA">
+
+    <label for="whatsapp">WhatsApp com DDD *</label>
+    <input id="whatsapp" name="whatsapp" required inputmode="tel"
+      placeholder="71999999999" maxlength="20">
+
+    <label for="preco">Preços ou faixa de preço</label>
+    <input id="preco" name="preco" maxlength="100"
+      placeholder="Ex.: serviços a partir de R$ 50">
+
+    <label for="horario">Horário de funcionamento</label>
+    <input id="horario" name="horario" maxlength="150"
+      placeholder="Ex.: segunda a sábado, das 8h às 18h">
+
+    <label for="descricao">Descrição do negócio *</label>
+    <textarea id="descricao" name="descricao" required maxlength="1000"
+      rows="4" placeholder="Explique quais serviços oferece."></textarea>
+
+    <label for="fotos">Fotos do estabelecimento (até 10)</label>
+    <input id="fotos" name="fotos" type="file" accept="image/*" multiple>
+    <small>As fotos selecionadas serão exibidas apenas como prévia neste navegador. Elas não serão enviadas para um servidor.</small>
+    <div id="previaFotos" class="previa-fotos"></div>
+
+    <button class="principal" type="submit">Enviar cadastro para aprovação</button>
   </form>
 </section>
 
-<main>
-  <section class="cards" id="inicio">
-    <button class="card blue" onclick="abrir('publicos')">
-      <span class="icon">🏛️</span>
-      <strong>Serviços Públicos</strong>
-      <p>Hospitais, postos de saúde, escolas, delegacias e órgãos públicos.</p>
-    </button>
+<section id="anuncios" class="painel">
+  <button class="voltar" onclick="voltar()">← Voltar</button>
+  <h2>Estabelecimentos cadastrados</h2>
+  <p>Esta lista mostra somente cadastros aprovados.</p>
+  <div id="listaPublica"></div>
+</section>
 
-    <button class="card orange" onclick="abrir('comercios')">
-      <span class="icon">🏪</span>
-      <strong>Comércios e Serviços</strong>
-      <p>Lojas, oficinas, restaurantes, salões e empresas cadastradas.</p>
-    </button>
+<section id="admin" class="painel">
+  <button class="voltar" onclick="voltar()">← Voltar</button>
+  <h2>Área administrativa de demonstração</h2>
+  <p>Confira os cadastros pendentes e aprove ou rejeite cada um.</p>
+  <p><strong>Atenção:</strong> esta área é apenas uma demonstração. Não possui senha nem proteção real e os dados ficam somente neste navegador.</p>
+  <div id="listaAdmin"></div>
+  <button class="perigo" onclick="limparCadastros()">Apagar todos os cadastros deste navegador</button>
+</section>
 
-    <button class="card green" onclick="abrir('turismo')">
-      <span class="icon">🌴</span>
-      <strong>Turismo e Lazer</strong>
-      <p>Praias, passeios, hotéis, clubes, cultura e atrações da cidade.</p>
-    </button>
-  </section>
-
-  <section class="panel" id="publicos">
-    <button class="back" onclick="voltar()">← Voltar ao início</button>
-    <h2>Serviços Públicos de Salvador</h2>
-    <p>Escolha uma categoria para ver locais no mapa ou consultar serviços oficiais.</p>
-
-    <div class="services">
-      <a class="service" href="https://www.google.com/maps/search/postos+de+sa%C3%BAde+em+Salvador+BA" target="_blank" rel="noopener"><span>🩺</span><strong>Postos de saúde</strong><small>Ver unidades de saúde no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/hospitais+p%C3%BAblicos+em+Salvador+BA" target="_blank" rel="noopener"><span>🏥</span><strong>Hospitais públicos</strong><small>Ver hospitais no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/escolas+p%C3%BAblicas+em+Salvador+BA" target="_blank" rel="noopener"><span>🏫</span><strong>Escolas públicas</strong><small>Ver escolas no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/delegacias+em+Salvador+BA" target="_blank" rel="noopener"><span>🚔</span><strong>Delegacias</strong><small>Ver delegacias no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/CRAS+em+Salvador+BA" target="_blank" rel="noopener"><span>🤝</span><strong>CRAS e assistência social</strong><small>Ver unidades no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/Corpo+de+Bombeiros+em+Salvador+BA" target="_blank" rel="noopener"><span>🚒</span><strong>Corpo de Bombeiros</strong><small>Ver unidades no mapa</small></a>
-      <a class="service" href="https://www.salvador.ba.gov.br/" target="_blank" rel="noopener"><span>🏛️</span><strong>Prefeitura de Salvador</strong><small>Acessar o portal municipal</small></a>
-      <a class="service" href="https://www.ba.gov.br/" target="_blank" rel="noopener"><span>📄</span><strong>Governo da Bahia</strong><small>Acessar o portal estadual</small></a>
-      <a class="service" href="https://www.gov.br/" target="_blank" rel="noopener"><span>🇧🇷</span><strong>Serviços federais</strong><small>Acessar o portal federal</small></a>
-    </div>
-
-    <p class="note">Os mapas mostram resultados de pesquisa do Google Maps; confirme endereço, horário e atendimento antes de se deslocar. Emergências: 190 (Polícia), 192 (SAMU) ou 193 (Bombeiros).</p>
-  </section>
-
-  <section class="panel" id="turismo">
-    <button class="back" onclick="voltar()">← Voltar ao início</button>
-    <h2>🌴 Turismo e Lazer em Salvador</h2>
-    <p>Explore opções de passeio. Os links abaixo abrem pesquisas no Google Maps.</p>
-
-    <div class="services">
-      <a class="service" href="https://www.google.com/maps/search/hot%C3%A9is+e+pousadas+em+Salvador+BA" target="_blank" rel="noopener"><span>🏨</span><strong>Hotéis e pousadas</strong><small>Encontre hospedagens</small></a>
-      <a class="service" href="https://www.google.com/maps/search/restaurantes+e+bares+em+Salvador+BA" target="_blank" rel="noopener"><span>🍽️</span><strong>Restaurantes e bares</strong><small>Descubra onde comer</small></a>
-      <a class="service" href="https://www.google.com/maps/search/praias+e+atra%C3%A7%C3%B5es+em+Salvador+BA" target="_blank" rel="noopener"><span>🏖️</span><strong>Praias e atrações</strong><small>Conheça pontos turísticos</small></a>
-      <a class="service" href="https://www.google.com/maps/search/passeios+tur%C3%ADsticos+em+Salvador+BA" target="_blank" rel="noopener"><span>🚤</span><strong>Passeios e excursões</strong><small>Encontre passeios</small></a>
-      <a class="service" href="https://www.google.com/maps/search/museus+cultura+e+entretenimento+em+Salvador+BA" target="_blank" rel="noopener"><span>🎭</span><strong>Cultura e entretenimento</strong><small>Explore a cultura local</small></a>
-      <a class="service" href="https://www.google.com/maps/search/clubes+em+Salvador+BA" target="_blank" rel="noopener"><span>🏊</span><strong>Clubes</strong><small>Encontre clubes e lazer</small></a>
-      <a class="service" href="https://www.google.com/maps/search/parques+e+espa%C3%A7os+de+lazer+em+Salvador+BA" target="_blank" rel="noopener"><span>🌳</span><strong>Espaços de lazer</strong><small>Parques e áreas de lazer</small></a>
-      <a class="service" href="https://www.google.com/maps/search/im%C3%B3veis+para+temporada+em+Salvador+BA" target="_blank" rel="noopener"><span>🏠</span><strong>Aluguel por temporada</strong><small>Pesquise opções de hospedagem</small></a>
-      <a class="service" href="https://www.google.com/maps/search/transporte+tur%C3%ADstico+em+Salvador+BA" target="_blank" rel="noopener"><span>🚌</span><strong>Transporte turístico</strong><small>Encontre opções de transporte</small></a>
-    </div>
-
-    <div class="actions">
-      <button class="primary" onclick="prepararCadastro('Hotel ou pousada');abrir('cadastro')">Cadastrar meu negócio de turismo</button>
-      <button class="secondary" onclick="prepararCadastro('Passeios e turismo');abrir('cadastro')">Cadastrar passeio ou atração</button>
-    </div>
-  </section>
-
-  <section class="panel" id="comercios">
-    <button class="back" onclick="voltar()">← Voltar ao início</button>
-    <h2>🏪 Comércios e Serviços</h2>
-    <p>Encontre empresas e serviços em Salvador.</p>
-
-    <div class="services">
-      <a class="service" href="https://www.google.com/maps/search/lojas+em+Salvador+BA" target="_blank" rel="noopener"><span>🛍️</span><strong>Lojas e comércio</strong><small>Pesquisar no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/oficinas+mec%C3%A2nicas+em+Salvador+BA" target="_blank" rel="noopener"><span>🔧</span><strong>Oficinas</strong><small>Pesquisar no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/sal%C3%B5es+de+beleza+em+Salvador+BA" target="_blank" rel="noopener"><span>✂️</span><strong>Beleza e estética</strong><small>Pesquisar no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/supermercados+em+Salvador+BA" target="_blank" rel="noopener"><span>🛒</span><strong>Supermercados</strong><small>Pesquisar no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/postos+de+gasolina+em+Salvador+BA" target="_blank" rel="noopener"><span>⛽</span><strong>Postos de gasolina</strong><small>Pesquisar no mapa</small></a>
-      <a class="service" href="https://www.google.com/maps/search/cl%C3%ADnicas+e+consult%C3%B3rios+em+Salvador+BA" target="_blank" rel="noopener"><span>➕</span><strong>Saúde particular</strong><small>Pesquisar no mapa</small></a>
-    </div>
-
-    <div class="actions">
-      <button class="primary" onclick="prepararCadastro('Loja ou comércio');abrir('cadastro')">Cadastrar minha empresa</button>
-      <button class="secondary" onclick="abrir('anuncios')">Ver cadastros deste navegador</button>
-    </div>
-  </section>
-
-  <section class="panel" id="cadastro">
-    <button class="back" onclick="voltar()">← Voltar</button>
-    <h2>📝 Cadastro de empresa</h2>
-
-    <div class="status">Protótipo: este formulário demonstra os campos. O envio não cria uma conta real e não publica o anúncio na internet. Não coloque senhas, documentos pessoais ou dados bancários aqui.</div>
-
-    <form id="formEmpresa">
-      <div class="form-grid">
-        <div class="field">
-          <label for="nome">Nome da empresa ou negócio *</label>
-          <input id="nome" name="nome" required maxlength="100">
-        </div>
-
-        <div class="field">
-          <label for="categoria">Categoria *</label>
-          <select id="categoria" name="categoria" required>
-            <option value="">Selecione</option>
-            <option>Hotel ou pousada</option>
-            <option>Restaurante ou bar</option>
-            <option>Clube ou lazer</option>
-            <option>Passeios e turismo</option>
-            <option>Praia ou atração turística</option>
-            <option>Aluguel por temporada</option>
-            <option>Transporte turístico</option>
-            <option>Loja ou comércio</option>
-            <option>Oficina ou automotivo</option>
-            <option>Beleza e estética</option>
-            <option>Saúde</option>
-            <option>Outro serviço</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="responsavel">Nome do responsável *</label>
-          <input id="responsavel" name="responsavel" required maxlength="100">
-        </div>
-
-        <div class="field">
-          <label for="whatsapp">WhatsApp comercial *</label>
-          <input id="whatsapp" name="whatsapp" type="tel" placeholder="(71) 99999-9999" required maxlength="25">
-        </div>
-
-        <div class="field full">
-          <label for="endereco">Endereço em Salvador *</label>
-          <input id="endereco" name="endereco" required maxlength="180">
-        </div>
-
-        <div class="field">
-          <label for="preco">Preço ou faixa de preço</label>
-          <input id="preco" name="preco" placeholder="Ex.: a partir de R$ 50">
-        </div>
-
-        <div class="field">
-          <label for="horario">Horário de funcionamento</label>
-          <input id="horario" name="horario" placeholder="Ex.: seg. a sáb., 9h às 18h">
-        </div>
-
-        <div class="field full">
-          <label for="descricao">Descrição dos produtos e serviços *</label>
-          <textarea id="descricao" name="descricao" required maxlength="1200" placeholder="Conte o que sua empresa oferece"></textarea>
-        </div>
-
-        <div class="field full">
-          <label for="fotos">Fotos da empresa (máximo 10)</label>
-          <input id="fotos" name="fotos" type="file" accept="image/*" multiple>
-          <small id="fotoInfo">Selecione até 10 imagens para visualizar nesta demonstração.</small>
-          <div id="previewFotos" class="services"></div>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button class="primary" type="submit">Enviar para análise (demonstração)</button>
-        <button class="secondary" type="reset">Limpar formulário</button>
-      </div>
-    </form>
-
-    <p id="mensagemCadastro" role="status"></p>
-  </section>
-
-  <section class="panel" id="anuncios">
-    <button class="back" onclick="voltar()">← Voltar ao início</button>
-    <h2>📋 Cadastros de demonstração</h2>
-    <div class="status">Esta lista é local e serve apenas para testar o formulário no mesmo navegador. Não é um painel administrativo seguro e os dados não são compartilhados com outros usuários.</div>
-    <div id="listaAnuncios"></div>
-    <button class="secondary" onclick="limparCadastros()">Apagar cadastros locais deste navegador</button>
-  </section>
-
-  <section class="categories" id="categorias">
-    <h2>Categorias em destaque</h2>
-    <div class="category-grid">
-      <div class="category">🍴 Restaurantes</div>
-      <div class="category">🍺 Bares</div>
-      <div class="category">🛏️ Hotéis e pousadas</div>
-      <div class="category">🔧 Oficinas</div>
-      <div class="category">✂️ Beleza e estética</div>
-      <div class="category">➕ Saúde</div>
-      <div class="category">⛽ Postos de gasolina</div>
-      <div class="category">🛒 Supermercados</div>
-    </div>
-  </section>
-</main>
-
-<footer>Salvador na Mão • Protótipo em desenvolvimento</footer>
+<footer>
+  <p><strong>Salvador na Mão</strong></p>
+  <p>Um projeto para conectar moradores, comerciantes e turistas.</p>
+  <button onclick="abrir('admin')">Área administrativa</button>
+</footer>
 
 <script>
-const secoes=['publicos','turismo','comercios','cadastro','anuncios'];
-let fotosSelecionadas=[];
+const CHAVE = 'salvadorNaMaoCadastros';
+let fotosSelecionadas = [];
 
-function abrir(id){
-  document.getElementById('inicio').style.display='none';
-  document.getElementById('categorias').style.display='none';
-  secoes.forEach(s=>{
-    document.getElementById(s).style.display=s===id?'block':'none';
+function obterCadastros() {
+  try {
+    return JSON.parse(localStorage.getItem(CHAVE)) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function salvarCadastros(cadastros) {
+  localStorage.setItem(CHAVE, JSON.stringify(cadastros));
+}
+
+function abrir(id) {
+  document.querySelectorAll('.painel').forEach(p => p.style.display = 'none');
+
+  const inicio = document.getElementById('inicio');
+  const categorias = document.getElementById('categorias');
+  const publicos = document.getElementById('publicos');
+
+  if (inicio) inicio.style.display = 'none';
+  if (categorias) categorias.style.display = 'none';
+  if (publicos) publicos.style.display = 'none';
+
+  const painel = document.getElementById(id);
+  if (painel) painel.style.display = 'block';
+
+  if (id === 'anuncios') renderPublicadas();
+  if (id === 'admin') mostrarAprovacoes();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function voltar() {
+  document.querySelectorAll('.painel').forEach(p => p.style.display = 'none');
+
+  const inicio = document.getElementById('inicio');
+  const categorias = document.getElementById('categorias');
+  const publicos = document.getElementById('publicos');
+
+  if (inicio) inicio.style.display = 'block';
+  if (categorias) categorias.style.display = 'block';
+  if (publicos) publicos.style.display = 'block';
+
+  renderPublicadas();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prepararCadastro(categoria) {
+  abrir('cadastro');
+
+  const campo = document.getElementById('categoria');
+  if (campo) {
+    const opcoes = [...campo.options];
+    const encontrada = opcoes.find(o =>
+      o.value.toLowerCase() === categoria.toLowerCase() ||
+      o.text.toLowerCase() === categoria.toLowerCase()
+    );
+
+    if (encontrada) {
+      campo.value = encontrada.value;
+    } else {
+      campo.value = 'Comércio e serviços';
+    }
+  }
+}
+
+function buscar() {
+  const campo = document.getElementById('busca');
+  if (!campo) return;
+
+  const termo = campo.value.trim().toLowerCase();
+  const aprovados = obterCadastros().filter(c => c.status === 'aprovado');
+
+  const encontrados = aprovados.filter(c =>
+    [c.nome, c.categoria, c.endereco, c.descricao]
+      .some(valor => (valor || '').toLowerCase().includes(termo))
+  );
+
+  exibirListaPublica(encontrados);
+  abrir('anuncios');
+  exibirListaPublica(encontrados);
+}
+
+document.getElementById('fotos').addEventListener('change', function () {
+  const arquivos = [...this.files].slice(0, 10);
+  fotosSelecionadas = [];
+  const previa = document.getElementById('previaFotos');
+  previa.innerHTML = '';
+
+  arquivos.forEach(arquivo => {
+    if (!arquivo.type.startsWith('image/')) return;
+
+    const leitor = new FileReader();
+    leitor.onload = function (evento) {
+      fotosSelecionadas.push(evento.target.result);
+
+      const img = document.createElement('img');
+      img.src = evento.target.result;
+      img.alt = 'Prévia da foto selecionada';
+      img.style.width = '90px';
+      img.style.height = '75px';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '8px';
+      img.style.margin = '4px';
+      previa.appendChild(img);
+    };
+    leitor.readAsDataURL(arquivo);
   });
-  if(id==='anuncios') mostrarAnuncios();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
 
-function voltar(){
-  secoes.forEach(s=>{
-    document.getElementById(s).style.display='none';
-  });
-  document.getElementById('inicio').style.display='grid';
-  document.getElementById('categorias').style.display='block';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function prepararCadastro(categoria){
-  document.getElementById('categoria').value=categoria;
-  document.getElementById('mensagemCadastro').textContent='';
-}
-
-function buscar(){
-  const termo=document.getElementById('pesquisa').value.trim().toLowerCase();
-
-  if(!termo){
-    alert('Digite o que você procura.');
-    return;
+  if (this.files.length > 10) {
+    alert('Você pode selecionar no máximo 10 fotos.');
   }
-
-  if(/posto|hospital|sa[uú]de|escola|delegacia|bombeiro|cras|prefeitura|p[uú]blico/.test(termo)){
-    abrir('publicos');
-    return;
-  }
-
-  if(/praia|hotel|pousada|turismo|passeio|clube|lazer|bar|restaurante|cultura|parque|temporada|atração|turístico/.test(termo)){
-    abrir('turismo');
-    return;
-  }
-
-  abrir('comercios');
-}
-
-document.getElementById('fotos').addEventListener('change',function(){
-  const arquivos=Array.from(this.files||[]);
-  const info=document.getElementById('fotoInfo');
-  const preview=document.getElementById('previewFotos');
-
-  preview.replaceChildren();
-  fotosSelecionadas=[];
-
-  if(arquivos.length>10){
-    info.textContent='Você selecionou '+arquivos.length+' arquivos. O limite é 10; selecione novamente até 10 fotos.';
-    this.value='';
-    return;
-  }
-
-  const invalidos=arquivos.filter(f=>!f.type.startsWith('image/'));
-
-  if(invalidos.length){
-    info.textContent='Selecione apenas arquivos de imagem.';
-    this.value='';
-    return;
-  }
-
-  info.textContent=arquivos.length+' foto(s) selecionada(s). Elas serão usadas apenas na demonstração local.';
-
-  arquivos.forEach(file=>{
-    const url=URL.createObjectURL(file);
-    fotosSelecionadas.push({nome:file.name,url});
-
-    const box=document.createElement('div');
-    box.className='service';
-
-    const img=document.createElement('img');
-    img.src=url;
-    img.alt='Prévia de '+file.name;
-    img.style.maxWidth='100%';
-    img.style.maxHeight='120px';
-
-    const label=document.createElement('small');
-    label.textContent=file.name;
-
-    box.append(img,label);
-    preview.append(box);
-  });
 });
 
-document.getElementById('formEmpresa').addEventListener('submit',function(e){
-  e.preventDefault();
+document.getElementById('formCadastro').addEventListener('submit', function (evento) {
+  evento.preventDefault();
 
-  const fd=new FormData(this);
-
-  const cadastro={
-    id:Date.now(),
-    nome:fd.get('nome').trim(),
-    categoria:fd.get('categoria'),
-    responsavel:fd.get('responsavel').trim(),
-    whatsapp:fd.get('whatsapp').trim(),
-    endereco:fd.get('endereco').trim(),
-    preco:fd.get('preco').trim(),
-    horario:fd.get('horario').trim(),
-    descricao:fd.get('descricao').trim(),
-    fotos:fotosSelecionadas.map(f=>f.nome),
-    status:'Pendente (demonstração)',
-    criadoEm:new Date().toLocaleString('pt-BR')
+  const dados = new FormData(this);
+  const cadastro = {
+    id: Date.now().toString(),
+    nome: dados.get('nome').trim(),
+    categoria: dados.get('categoria'),
+    responsavel: dados.get('responsavel').trim(),
+    endereco: dados.get('endereco').trim(),
+    whatsapp: dados.get('whatsapp').replace(/\D/g, ''),
+    preco: dados.get('preco').trim(),
+    horario: dados.get('horario').trim(),
+    descricao: dados.get('descricao').trim(),
+    fotos: [...fotosSelecionadas],
+    status: 'pendente',
+    criadoEm: new Date().toISOString()
   };
 
-  try{
-    const itens=JSON.parse(localStorage.getItem('salvadorNaMaoCadastros')||'[]');
-    itens.push(cadastro);
-    localStorage.setItem('salvadorNaMaoCadastros',JSON.stringify(itens));
-
-    document.getElementById('mensagemCadastro').textContent='Demonstração salva neste navegador. Ainda não foi enviada para análise real nem publicada no site.';
-
-    this.reset();
-    document.getElementById('previewFotos').replaceChildren();
-    document.getElementById('fotoInfo').textContent='Selecione até 10 imagens para visualizar nesta demonstração.';
-    fotosSelecionadas=[];
-  }catch(err){
-    document.getElementById('mensagemCadastro').textContent='Não foi possível salvar neste navegador. Nenhum cadastro foi enviado para um servidor.';
-  }
-});
-
-function mostrarAnuncios(){
-  const lista=document.getElementById('listaAnuncios');
-  lista.replaceChildren();
-
-  let itens=[];
-
-  try{
-    itens=JSON.parse(localStorage.getItem('salvadorNaMaoCadastros')||'[]');
-  }catch(e){}
-
-  if(!itens.length){
-    lista.textContent='Nenhum cadastro de demonstração neste navegador.';
+  if (!cadastro.nome || !cadastro.categoria || !cadastro.responsavel ||
+      !cadastro.endereco || !cadastro.whatsapp || !cadastro.descricao) {
+    alert('Preencha todos os campos obrigatórios.');
     return;
   }
 
-  const grid=document.createElement('div');
-  grid.className='business-list';
-
-  itens.slice().reverse().forEach(item=>{
-    const card=document.createElement('article');
-    card.className='business-item';
-
-    const title=document.createElement('h3');
-    title.textContent=item.nome;
-
-    const status=document.createElement('p');
-    status.textContent='Status: '+item.status;
-
-    const cat=document.createElement('p');
-    cat.textContent='Categoria: '+item.categoria;
-
-    const desc=document.createElement('p');
-    desc.textContent=item.descricao;
-
-    const endereco=document.createElement('p');
-    endereco.textContent='Endereço: '+item.endereco;
-
-    const contato=document.createElement('p');
-    contato.textContent='WhatsApp: '+item.whatsapp;
-
-    const fotos=document.createElement('p');
-    fotos.textContent='Fotos selecionadas: '+item.fotos.length+' (nomes: '+(item.fotos.join(', ')||'nenhuma')+')';
-
-    card.append(title,status,cat,desc,endereco,contato,fotos);
-    grid.append(card);
-  });
-
-  lista.append(grid);
-}
-
-function limparCadastros(){
-  if(confirm('Apagar todos os cadastros de demonstração guardados neste navegador?')){
-    localStorage.removeItem('salvadorNaMaoCadastros');
-    mostrarAnuncios();
+  if (cadastro.whatsapp.length < 10 || cadastro.whatsapp.length > 13) {
+    alert('Confira o WhatsApp e informe o DDD.');
+    return;
   }
+
+  const cadastros = obterCadastros();
+  cadastros.push(cadastro);
+  salvarCadastros(cadastros);
+
+  alert('Cadastro enviado! Ele ficará visível ao público somente depois da aprovação do administrador.');
+
+  this.reset();
+  fotosSelecionadas = [];
+  document.getElementById('previaFotos').innerHTML = '';
+  voltar();
+});
+
+function criarBotaoMapa(endereco) {
+  const link = document.createElement('a');
+  link.href = 'https://www.google.com/maps/dir/?api=1&destination=' +
+    encodeURIComponent(endereco + ', Salvador, Bahia, Brasil');
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.textContent = 'Como chegar';
+  link.className = 'botao-mapa';
+  return link;
 }
+
+function criarCard(cadastro, administrativo = false) {
+  const card = document.createElement('article');
+  card.className = 'cartao-negocio';
+
+  const titulo = document.createElement('h3');
+  titulo.textContent = cadastro.nome;
+  card.appendChild(titulo);
+
+  const categoria = document.createElement('p');
+  categoria.textContent = 'Categoria: ' + cadastro.categoria;
+  card.appendChild(categoria);
+
+  const endereco = document.createElement('p');
+  endereco.textContent = 'Endereço: ' + cadastro.endereco;
+  card.appendChild(endereco);
+
+  if (cadastro.preco) {
+    const preco = document.createElement('p');
+    preco.textContent = 'Preço: ' + cadastro.preco;
+    card.appendChild(preco);
+  }
+
+  if (cadastro.horario) {
+    const horario = document.createElement('p');
+    horario.textContent = 'Horário: ' + cadastro.horario;
+    card.appendChild(horario);
+  }
+
+  const descricao = document.createElement('p');
+  descricao.textContent = cadastro.descricao;
+  card.appendChild(descricao);
+
+  if (cadastro.fotos && cadastro.fotos.length) {
+    const galeria = document.createElement('div');
+    galeria.className = 'previa-fotos';
+
+    cadastro.fotos.forEach(foto => {
+      const img = document.createElement('img');
+      img.src = foto;
+      img.alt = 'Foto de ' + cadastro.nome;
+      img.style.width = '100px';
+      img.style.height = '80px';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '8px';
+      img.style.margin = '4px';
+      galeria.appendChild(img);
+    });
+
+    card.appendChild(galeria);
+  }
+
+  if (cadastro.whatsapp) {
+    const whatsapp = document.createElement('a');
+    whatsapp.href = 'https://wa.me/55' + cadastro.whatsapp;
+    whatsapp.target = '_blank';
+    whatsapp.rel = 'noopener noreferrer';
+    whatsapp.textContent = 'Falar no WhatsApp';
+    whatsapp.className = 'botao-whatsapp';
+    card.appendChild(whatsapp);
+  }
+
+  card.appendChild(criarBotaoMapa(cadastro.endereco));
+
+  if (administrativo) {
+    const status = document.createElement('p');
+    status.textContent = 'Status: ' + cadastro.status;
+    card.appendChild(status);
+
+    if (cadastro.status === 'pendente') {
+      const aprovar = document.createElement('button');
+      aprovar.textContent = 'Aprovar';
+      aprovar.onclick = () => mudarStatus(cadastro.id, 'aprovado');
+      card.appendChild(aprovar);
+
+      const rejeitar = document.createElement('button');
+      rejeitar.textContent = 'Rejeitar';
+      rejeitar.onclick = () => mudarStatus(cadastro.id, 'rejeitado');
+      card.appendChild(rejeitar);
+    }
+  }
+
+  return card;
+}
+
+function exibirListaPublica(lista) {
+  const destino = document.getElementById('listaPublica');
+  if (!destino) return;
+
+  destino.innerHTML = '';
+
+  if (!lista.length) {
+    destino.textContent = 'Nenhum estabelecimento aprovado encontrado.';
+    return;
+  }
+
+  lista.forEach(cadastro => destino.appendChild(criarCard(cadastro)));
+}
+
+function renderPublicadas() {
+  const aprovados = obterCadastros().filter(c => c.status === 'aprovado');
+  exibirListaPublica(aprovados);
+}
+
+function mostrarAprovacoes() {
+  const destino = document.getElementById('listaAdmin');
+  if (!destino) return;
+
+  destino.innerHTML = '';
+  const cadastros = obterCadastros();
+
+  if (!cadastros.length) {
+    destino.textContent = 'Ainda não há cadastros neste navegador.';
+    return;
+  }
+
+  cadastros.forEach(cadastro => {
+    destino.appendChild(criarCard(cadastro, true));
+  });
+}
+
+function mudarStatus(id, status) {
+  const cadastros = obterCadastros().map(cadastro =>
+    cadastro.id === id ? { ...cadastro, status } : cadastro
+  );
+
+  salvarCadastros(cadastros);
+  mostrarAprovacoes();
+  renderPublicadas();
+}
+
+function limparCadastros() {
+  if (!confirm('Tem certeza de que deseja apagar todos os cadastros deste navegador?')) {
+    return;
+  }
+
+  localStorage.removeItem(CHAVE);
+  mostrarAprovacoes();
+  renderPublicadas();
+}
+
+renderPublicadas();
 </script>
 </body>
 </html>
