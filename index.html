@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#073d70">
 <title>Salvador na Mão</title>
+
 <style>
 *{box-sizing:border-box}
 :root{--blue:#0878d1;--navy:#073d70;--green:#07885a;--orange:#ed781a;--bg:#f3f6fa;--text:#16324d}
 body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-header{background:#fff;padding:16px 18px;display:flex;align-items:center;box-shadow:0 2px 10px #0001}
+header{background:#fff;padding:16px 18px;box-shadow:0 2px 10px #0001}
 .logo{font-size:20px;font-weight:bold;color:var(--navy)}
 .logo small{display:block;font-size:10px;margin-top:5px}
 .hero{background:linear-gradient(#0005,#0009),url('https://commons.wikimedia.org/wiki/Special:FilePath/Elevador_Lacerda_com_Baia_de_Todos_os_Santos.jpg') center/cover no-repeat;color:white;text-align:center;padding:45px 16px 65px}
@@ -34,10 +35,9 @@ main{max-width:1050px;margin:-25px auto 0;padding:0 15px 35px;position:relative}
 .service strong{display:block;margin-bottom:6px}
 .service small{color:#526a7e;line-height:1.4}
 .note{font-size:12px;color:#63778a;line-height:1.5;margin-top:16px}
-.categories{margin-top:28px}
-.categories h2{font-size:19px}
-.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.category{background:white;padding:14px 8px;border-radius:10px;text-align:center;font-size:13px;font-weight:bold}
+.category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.category-btn{background:#f4f8fc;border:1px solid #dbe7f1;border-radius:10px;padding:13px 10px;text-align:left;color:var(--text);font-weight:bold;cursor:pointer}
+.category-btn:hover{border-color:var(--blue);background:#eaf5ff}
 .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .field{display:flex;flex-direction:column;gap:6px}
 .field.full{grid-column:1/-1}
@@ -48,503 +48,545 @@ textarea{min-height:95px;resize:vertical}
 .secondary{background:#e8f1fa;color:var(--navy);border:0;border-radius:7px;padding:12px 16px;font-weight:bold;cursor:pointer}
 .status{padding:12px;border-radius:8px;background:#fff6df;color:#6b4a00;line-height:1.45;margin:12px 0}
 .business-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
-.business-item{border:1px solid #dbe7f1;border-radius:12px;padding:14px;background:white}
+.business-item{border:1px solid #dbe7f1;border-radius:12px;padding:14px;background:white;overflow-wrap:anywhere}
 .business-item h3{margin:0 0 8px;color:var(--navy)}
-.business-item p{line-height:1.45;overflow-wrap:anywhere}
+.business-item p{line-height:1.45;margin:8px 0;overflow-wrap:anywhere}
 .business-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .business-actions a,.business-actions button{display:inline-block;text-decoration:none;border:0;border-radius:7px;padding:10px 12px;font-weight:bold;font-size:13px;cursor:pointer}
 .map-link{background:#0878d1;color:white}
-.approve-btn{background:#07885a;color:white}
+.whatsapp-link,.approve-btn{background:#07885a;color:white}
 .reject-btn{background:#fff0df;color:#8a4b00}
-#empresasPublicadas{margin-top:24px}
+.danger{background:#b42318;color:#fff;border:0;border-radius:7px;padding:12px 16px;font-weight:bold;cursor:pointer}
 footer{text-align:center;color:#687d8e;font-size:12px;padding:20px}
+footer button{background:#e8f1fa;color:var(--navy);border:0;border-radius:7px;padding:10px 14px;font-weight:bold;cursor:pointer}
+
 @media(max-width:650px){
 .cards{grid-template-columns:1fr}
 .card{min-height:auto}
 .services{grid-template-columns:repeat(2,1fr)}
-.category-grid{grid-template-columns:repeat(2,1fr)}
+.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .form-grid,.business-list{grid-template-columns:1fr}
 .field.full{grid-column:auto}
 }
 </style>
 </head>
+
 <body>
 <header>
 <div class="logo">🌴 SALVADOR NA MÃO
 <small>TUDO SOBRE SALVADOR EM UM SÓ LUGAR</small>
 </div>
 </header>
+
 <section class="hero">
 <h1>Salvador na Mão</h1>
-<p>Comércios, serviços, lazer e informações da cidade.<br>Tudo sobre Salvador em um só lugar.</p>
-<form class="search" onsubmit="event.preventDefault();buscar()">
-<input id="pesquisa" type="search" placeholder="O que você procura em Salvador?" aria-label="Pesquisar">
+<p>Comércios, serviços, lazer e informações da cidade.<br>
+Tudo sobre Salvador em um só lugar.</p>
+
+<form class="search" id="formPesquisa">
+<input id="pesquisa" type="search"
+placeholder="O que você procura em Salvador?"
+aria-label="Pesquisar">
 <button type="submit">Buscar</button>
 </form>
 </section>
+
 <main>
+
 <section class="cards" id="inicio">
 <button class="card blue" onclick="abrir('publicos')">
-<span class="icon">🏛️</span><strong>Serviços Públicos</strong>
+<span class="icon">🏛️</span>
+<strong>Serviços Públicos</strong>
 <p>Hospitais, postos de saúde, escolas, delegacias e órgãos públicos.</p>
 </button>
+
 <button class="card orange" onclick="abrir('comercios')">
-<span class="icon">🏪</span><strong>Comércios e Serviços</strong>
+<span class="icon">🏪</span>
+<strong>Comércios e Serviços</strong>
 <p>Lojas, oficinas, restaurantes, salões e empresas cadastradas.</p>
 </button>
+
 <button class="card green" onclick="abrir('turismo')">
-<span class="icon">🌴</span><strong>Turismo e Lazer</strong>
+<span class="icon">🌴</span>
+<strong>Turismo e Lazer</strong>
 <p>Praias, passeios, hotéis, clubes, cultura e atrações da cidade.</p>
 </button>
 </section>
+
 <section class="panel" id="publicos">
 <button class="back" onclick="voltar()">← Voltar ao início</button>
 <h2>Serviços Públicos de Salvador</h2>
-<p>Escolha uma categoria para ver locais no mapa ou consultar serviços oficiais.</p>
+<p>Escolha uma categoria para consultar locais no mapa ou serviços oficiais.</p>
+
 <div class="services">
 <a class="service" href="https://www.google.com/maps/search/postos+de+sa%C3%BAde+em+Salvador+BA" target="_blank" rel="noopener"><span>🩺</span><strong>Postos de saúde</strong><small>Ver unidades no mapa</small></a>
+
 <a class="service" href="https://www.google.com/maps/search/hospitais+p%C3%BAblicos+em+Salvador+BA" target="_blank" rel="noopener"><span>🏥</span><strong>Hospitais públicos</strong><small>Ver hospitais no mapa</small></a>
+
 <a class="service" href="https://www.google.com/maps/search/escolas+p%C3%BAblicas+em+Salvador+BA" target="_blank" rel="noopener"><span>🏫</span><strong>Escolas públicas</strong><small>Ver escolas no mapa</small></a>
+
 <a class="service" href="https://www.google.com/maps/search/delegacias+em+Salvador+BA" target="_blank" rel="noopener"><span>🚔</span><strong>Delegacias</strong><small>Ver delegacias no mapa</small></a>
+
 <a class="service" href="https://www.google.com/maps/search/CRAS+em+Salvador+BA" target="_blank" rel="noopener"><span>🤝</span><strong>CRAS e assistência social</strong><small>Ver unidades no mapa</small></a>
+
 <a class="service" href="https://www.google.com/maps/search/Corpo+de+Bombeiros+em+Salvador+BA" target="_blank" rel="noopener"><span>🚒</span><strong>Corpo de Bombeiros</strong><small>Ver unidades no mapa</small></a>
+
 <a class="service" href="https://www.salvador.ba.gov.br/" target="_blank" rel="noopener"><span>🏛️</span><strong>Prefeitura de Salvador</strong><small>Portal municipal</small></a>
+
 <a class="service" href="https://www.ba.gov.br/" target="_blank" rel="noopener"><span>📄</span><strong>Governo da Bahia</strong><small>Portal estadual</small></a>
+
 <a class="service" href="https://www.gov.br/" target="_blank" rel="noopener"><span>🇧🇷</span><strong>Serviços federais</strong><small>Portal federal</small></a>
 </div>
+
 <p class="note">Confirme endereço, horário e atendimento antes de se deslocar. Emergências: 190 (Polícia), 192 (SAMU) ou 193 (Bombeiros).</p>
 </section>
-<section id="turismo" class="painel">
-  <button class="voltar" onclick="voltar()">← Voltar</button>
-  <h2>Turismo em Salvador</h2>
-  <p>Encontre serviços e lugares para conhecer na cidade.</p>
-  <div class="categorias">
-    <button onclick="prepararCadastro('Hotéis e pousadas')">Hotéis e pousadas</button>
-    <button onclick="prepararCadastro('Restaurantes e bares')">Restaurantes e bares</button>
-    <button onclick="prepararCadastro('Praias')">Praias</button>
-    <button onclick="prepararCadastro('Passeios e tours')">Passeios e tours</button>
-    <button onclick="prepararCadastro('Cultura e história')">Cultura e história</button>
-    <button onclick="prepararCadastro('Casas de shows e clubes')">Casas de shows e clubes</button>
-    <button onclick="prepararCadastro('Parques e lazer')">Parques e lazer</button>
-    <button onclick="prepararCadastro('Aluguel por temporada')">Aluguel por temporada</button>
-    <button onclick="prepararCadastro('Transporte turístico')">Transporte turístico</button>
-  </div>
-  <button class="principal" onclick="abrir('anuncios')">Ver locais cadastrados</button>
-  <button class="principal" onclick="prepararCadastro('Turismo')">Cadastrar serviço turístico</button>
+
+<section class="panel" id="turismo">
+<button class="back" onclick="voltar()">← Voltar ao início</button>
+<h2>Turismo e lazer</h2>
+<p>Escolha uma categoria para ver os locais cadastrados e aprovados.</p>
+<div class="category-grid" id="categoriasTurismo"></div>
+<div class="actions">
+<button class="primary" onclick="prepararCadastro('Turismo')">＋ Adicionar estabelecimento turístico</button>
+</div>
 </section>
 
-<section id="comercios" class="painel">
-  <button class="voltar" onclick="voltar()">← Voltar</button>
-  <h2>Comércio e serviços</h2>
-  <p>Encontre empresas, profissionais e estabelecimentos.</p>
-  <div class="categorias">
-    <button onclick="prepararCadastro('Oficinas')">Oficinas</button>
-    <button onclick="prepararCadastro('Beleza')">Beleza</button>
-    <button onclick="prepararCadastro('Lojas')">Lojas</button>
-    <button onclick="prepararCadastro('Restaurantes e bares')">Restaurantes e bares</button>
-    <button onclick="prepararCadastro('Serviços em geral')">Serviços em geral</button>
-    <button onclick="prepararCadastro('Transporte')">Transporte</button>
-  </div>
-  <button class="principal" onclick="abrir('anuncios')">Ver estabelecimentos cadastrados</button>
-  <button class="principal" onclick="prepararCadastro('Comércio e serviços')">Cadastrar estabelecimento</button>
+<section class="panel" id="comercios">
+<button class="back" onclick="voltar()">← Voltar ao início</button>
+<h2>Comércio e serviços</h2>
+<p>Escolha uma categoria para ver os estabelecimentos cadastrados e aprovados.</p>
+<div class="category-grid" id="categoriasComercio"></div>
+<div class="actions">
+<button class="primary" onclick="prepararCadastro('Comércio e serviços')">＋ Adicionar estabelecimento</button>
+</div>
 </section>
 
-<section id="cadastro" class="painel">
-  <button class="voltar" onclick="voltar()">← Voltar</button>
-  <h2>Cadastrar estabelecimento ou serviço</h2>
-  <p>Preencha os dados. O cadastro ficará aguardando aprovação do administrador.</p>
-
-  <form id="formCadastro">
-    <label for="nome">Nome do estabelecimento ou serviço *</label>
-    <input id="nome" name="nome" required maxlength="100" placeholder="Nome do negócio">
-
-    <label for="categoria">Categoria *</label>
-    <select id="categoria" name="categoria" required>
-      <option value="">Selecione uma categoria</option>
-      <option>Hotéis e pousadas</option>
-      <option>Restaurantes e bares</option>
-      <option>Praias</option>
-      <option>Passeios e tours</option>
-      <option>Cultura e história</option>
-      <option>Casas de shows e clubes</option>
-      <option>Parques e lazer</option>
-      <option>Aluguel por temporada</option>
-      <option>Transporte turístico</option>
-      <option>Oficinas</option>
-      <option>Beleza</option>
-      <option>Lojas</option>
-      <option>Serviços em geral</option>
-      <option>Transporte</option>
-      <option>Comércio e serviços</option>
-      <option>Turismo</option>
-    </select>
-
-    <label for="responsavel">Nome do responsável *</label>
-    <input id="responsavel" name="responsavel" required maxlength="100">
-
-    <label for="endereco">Endereço completo *</label>
-    <input id="endereco" name="endereco" required maxlength="200"
-      placeholder="Rua, número, bairro, Salvador - BA">
-
-    <label for="whatsapp">WhatsApp com DDD *</label>
-    <input id="whatsapp" name="whatsapp" required inputmode="tel"
-      placeholder="71999999999" maxlength="20">
-
-    <label for="preco">Preços ou faixa de preço</label>
-    <input id="preco" name="preco" maxlength="100"
-      placeholder="Ex.: serviços a partir de R$ 50">
-
-    <label for="horario">Horário de funcionamento</label>
-    <input id="horario" name="horario" maxlength="150"
-      placeholder="Ex.: segunda a sábado, das 8h às 18h">
-
-    <label for="descricao">Descrição do negócio *</label>
-    <textarea id="descricao" name="descricao" required maxlength="1000"
-      rows="4" placeholder="Explique quais serviços oferece."></textarea>
-
-    <label for="fotos">Fotos do estabelecimento (até 10)</label>
-    <input id="fotos" name="fotos" type="file" accept="image/*" multiple>
-    <small>As fotos selecionadas serão exibidas apenas como prévia neste navegador. Elas não serão enviadas para um servidor.</small>
-    <div id="previaFotos" class="previa-fotos"></div>
-
-    <button class="principal" type="submit">Enviar cadastro para aprovação</button>
-  </form>
+<section class="panel" id="anuncios">
+<button class="back" onclick="voltar()">← Voltar ao início</button>
+<h2 id="tituloLista">Estabelecimentos aprovados</h2>
+<p id="subtituloLista">Confira os estabelecimentos disponíveis.</p>
+<div id="listaPublica" class="business-list"></div>
 </section>
 
-<section id="anuncios" class="painel">
-  <button class="voltar" onclick="voltar()">← Voltar</button>
-  <h2>Estabelecimentos cadastrados</h2>
-  <p>Esta lista mostra somente cadastros aprovados.</p>
-  <div id="listaPublica"></div>
+<section class="panel" id="cadastro">
+<button class="back" onclick="voltar()">← Voltar ao início</button>
+<h2>Adicionar estabelecimento</h2>
+<p>Preencha os dados. O estabelecimento só aparecerá publicamente depois de ser aprovado.</p>
+
+<form id="formCadastro">
+<div class="form-grid">
+
+<div class="field">
+<label for="nome">Nome do estabelecimento *</label>
+<input id="nome" name="nome" required maxlength="100">
+</div>
+
+<div class="field">
+<label for="categoria">Categoria *</label>
+<select id="categoria" name="categoria" required></select>
+</div>
+
+<div class="field">
+<label for="responsavel">Nome do responsável *</label>
+<input id="responsavel" name="responsavel" required maxlength="100">
+</div>
+
+<div class="field">
+<label for="endereco">Endereço completo *</label>
+<input id="endereco" name="endereco" required maxlength="200" placeholder="Rua, número, bairro, Salvador - BA">
+</div>
+
+<div class="field">
+<label for="whatsapp">WhatsApp com DDD *</label>
+<input id="whatsapp" name="whatsapp" required inputmode="tel" maxlength="20" placeholder="71999999999">
+</div>
+
+<div class="field">
+<label for="preco">Preço ou faixa de preço</label>
+<input id="preco" name="preco" maxlength="100" placeholder="Ex.: a partir de R$ 50">
+</div>
+
+<div class="field full">
+<label for="horario">Horário de funcionamento</label>
+<input id="horario" name="horario" maxlength="150">
+</div>
+
+<div class="field full">
+<label for="descricao">Descrição do negócio *</label>
+<textarea id="descricao" name="descricao" required maxlength="1000"></textarea>
+</div>
+
+<div class="field full">
+<label for="fotos">Fotos (opcional, até 5 nesta demonstração)</label>
+<input id="fotos" name="fotos" type="file" accept="image/*" multiple>
+<small>As imagens ficam apenas neste navegador; não são enviadas para um servidor.</small>
+<div id="previaFotos"></div>
+</div>
+
+</div>
+
+<div class="actions">
+<button class="primary" type="submit">Enviar para aprovação</button>
+<button class="secondary" type="button" onclick="voltar()">Cancelar</button>
+</div>
+</form>
 </section>
 
-<section id="admin" class="painel">
-  <button class="voltar" onclick="voltar()">← Voltar</button>
-  <h2>Área administrativa de demonstração</h2>
-  <p>Confira os cadastros pendentes e aprove ou rejeite cada um.</p>
-  <p><strong>Atenção:</strong> esta área é apenas uma demonstração. Não possui senha nem proteção real e os dados ficam somente neste navegador.</p>
-  <div id="listaAdmin"></div>
-  <button class="perigo" onclick="limparCadastros()">Apagar todos os cadastros deste navegador</button>
+<section class="panel" id="admin">
+<button class="back" onclick="voltar()">← Voltar ao início</button>
+<h2>Área administrativa</h2>
+<p class="status">Demonstração local: esta área não tem senha. Os cadastros ficam apenas neste navegador, não compartilhados com outros visitantes.</p>
+<div id="listaAdmin" class="business-list"></div>
+<div class="actions">
+<button class="danger" onclick="limparCadastros()">Apagar todos os cadastros deste navegador</button>
+</div>
 </section>
+</main>
 
 <footer>
-  <p><strong>Salvador na Mão</strong></p>
-  <p>Um projeto para conectar moradores, comerciantes e turistas.</p>
-  <button onclick="abrir('admin')">Área administrativa</button>
+<p><strong>Salvador na Mão</strong></p>
+<p>Um projeto para conectar moradores, comerciantes e turistas.</p>
+<button onclick="abrir('admin')">Área administrativa</button>
 </footer>
 
 <script>
-const CHAVE = 'salvadorNaMaoCadastros';
-let fotosSelecionadas = [];
+const CHAVE='salvadorNaMaoCadastros';
 
-function obterCadastros() {
-  try {
-    return JSON.parse(localStorage.getItem(CHAVE)) || [];
-  } catch (e) {
+const CT=[
+'Hotéis e pousadas',
+'Restaurantes e bares',
+'Praias',
+'Passeios e tours',
+'Cultura e história',
+'Casas de shows e clubes',
+'Parques e lazer',
+'Aluguel por temporada',
+'Transporte turístico'
+];
+
+const CC=[
+'Oficinas',
+'Beleza',
+'Lojas',
+'Restaurantes e bares',
+'Serviços em geral',
+'Transporte'
+];
+
+const TODAS=[...new Set([...CT,...CC,'Comércio e serviços','Turismo'])];
+let fotosSelecionadas=[];
+
+function obter(){
+  try{
+    return JSON.parse(localStorage.getItem(CHAVE))||[];
+  }catch(e){
     return [];
   }
 }
 
-function salvarCadastros(cadastros) {
-  localStorage.setItem(CHAVE, JSON.stringify(cadastros));
+function salvar(lista){
+  localStorage.setItem(CHAVE,JSON.stringify(lista));
 }
 
-function abrir(id) {
-  document.querySelectorAll('.painel').forEach(p => p.style.display = 'none');
-
-  const inicio = document.getElementById('inicio');
-  const categorias = document.getElementById('categorias');
-  const publicos = document.getElementById('publicos');
-
-  if (inicio) inicio.style.display = 'none';
-  if (categorias) categorias.style.display = 'none';
-  if (publicos) publicos.style.display = 'none';
-
-  const painel = document.getElementById(id);
-  if (painel) painel.style.display = 'block';
-
-  if (id === 'anuncios') renderPublicadas();
-  if (id === 'admin') mostrarAprovacoes();
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function botaoCategoria(categoria){
+  const botao=document.createElement('button');
+  botao.type='button';
+  botao.className='category-btn';
+  botao.textContent=categoria;
+  botao.onclick=()=>mostrarCategoria(categoria);
+  return botao;
 }
 
-function voltar() {
-  document.querySelectorAll('.painel').forEach(p => p.style.display = 'none');
+function montar(){
+  CT.forEach(c=>{
+    document.getElementById('categoriasTurismo')
+      .appendChild(botaoCategoria(c));
+  });
 
-  const inicio = document.getElementById('inicio');
-  const categorias = document.getElementById('categorias');
-  const publicos = document.getElementById('publicos');
+  CC.forEach(c=>{
+    document.getElementById('categoriasComercio')
+      .appendChild(botaoCategoria(c));
+  });
 
-  if (inicio) inicio.style.display = 'block';
-  if (categorias) categorias.style.display = 'block';
-  if (publicos) publicos.style.display = 'block';
+  const select=document.getElementById('categoria');
+  select.innerHTML='<option value="">Selecione uma categoria</option>';
 
-  renderPublicadas();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  TODAS.forEach(c=>{
+    const opcao=document.createElement('option');
+    opcao.value=c;
+    opcao.textContent=c;
+    select.appendChild(opcao);
+  });
 }
 
-function prepararCadastro(categoria) {
+function abrir(id){
+  document.querySelectorAll('.panel').forEach(p=>{
+    p.style.display='none';
+  });
+
+  document.getElementById('inicio').style.display='none';
+  document.getElementById(id).style.display='block';
+
+  if(id==='admin')mostrarAdmin();
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function voltar(){
+  document.querySelectorAll('.panel').forEach(p=>{
+    p.style.display='none';
+  });
+
+  document.getElementById('inicio').style.display='grid';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function prepararCadastro(categoria){
   abrir('cadastro');
 
-  const campo = document.getElementById('categoria');
-  if (campo) {
-    const opcoes = [...campo.options];
-    const encontrada = opcoes.find(o =>
-      o.value.toLowerCase() === categoria.toLowerCase() ||
-      o.text.toLowerCase() === categoria.toLowerCase()
-    );
-
-    if (encontrada) {
-      campo.value = encontrada.value;
-    } else {
-      campo.value = 'Comércio e serviços';
-    }
-  }
+  document.getElementById('categoria').value=
+    TODAS.find(c=>c.toLowerCase()===categoria.toLowerCase())||'';
 }
 
-function buscar() {
-  const campo = document.getElementById('busca');
-  if (!campo) return;
+function mostrarCategoria(categoria){
+  document.getElementById('tituloLista').textContent=categoria;
+  document.getElementById('subtituloLista').textContent=
+    'Estabelecimentos aprovados nesta categoria.';
 
-  const termo = campo.value.trim().toLowerCase();
-  const aprovados = obterCadastros().filter(c => c.status === 'aprovado');
+  abrir('anuncios');
 
-  const encontrados = aprovados.filter(c =>
-    [c.nome, c.categoria, c.endereco, c.descricao]
-      .some(valor => (valor || '').toLowerCase().includes(termo))
+  const lista=obter().filter(c=>
+    c.status==='aprovado'&&c.categoria===categoria
   );
 
-  exibirListaPublica(encontrados);
-  abrir('anuncios');
-  exibirListaPublica(encontrados);
+  exibir(lista);
 }
 
-document.getElementById('fotos').addEventListener('change', function () {
-  const arquivos = [...this.files].slice(0, 10);
-  fotosSelecionadas = [];
-  const previa = document.getElementById('previaFotos');
-  previa.innerHTML = '';
+function buscar(){
+  const termo=document.getElementById('pesquisa').value.trim().toLowerCase();
 
-  arquivos.forEach(arquivo => {
-    if (!arquivo.type.startsWith('image/')) return;
+  document.getElementById('tituloLista').textContent='Resultado da busca';
+  document.getElementById('subtituloLista').textContent=
+    termo?'Resultados para: '+termo:'Todos os estabelecimentos aprovados.';
 
-    const leitor = new FileReader();
-    leitor.onload = function (evento) {
-      fotosSelecionadas.push(evento.target.result);
+  abrir('anuncios');
 
-      const img = document.createElement('img');
-      img.src = evento.target.result;
-      img.alt = 'Prévia da foto selecionada';
-      img.style.width = '90px';
-      img.style.height = '75px';
-      img.style.objectFit = 'cover';
-      img.style.borderRadius = '8px';
-      img.style.margin = '4px';
+  const lista=obter().filter(c=>{
+    if(c.status!=='aprovado')return false;
+
+    return !termo||[
+      c.nome,c.categoria,c.endereco,c.descricao
+    ].some(valor=>(valor||'').toLowerCase().includes(termo));
+  });
+
+  exibir(lista);
+}
+
+document.getElementById('formPesquisa').addEventListener('submit',e=>{
+  e.preventDefault();
+  buscar();
+});
+
+document.getElementById('fotos').addEventListener('change',function(){
+  fotosSelecionadas=[];
+
+  const previa=document.getElementById('previaFotos');
+  previa.innerHTML='';
+
+  [...this.files].slice(0,5).forEach(arquivo=>{
+    if(!arquivo.type.startsWith('image/'))return;
+
+    const leitor=new FileReader();
+
+    leitor.onload=e=>{
+      fotosSelecionadas.push(e.target.result);
+
+      const img=document.createElement('img');
+      img.src=e.target.result;
+      img.alt='Prévia da foto';
+      img.style.cssText='width:85px;height:70px;object-fit:cover;border-radius:8px;margin:4px';
+
       previa.appendChild(img);
     };
+
     leitor.readAsDataURL(arquivo);
   });
 
-  if (this.files.length > 10) {
-    alert('Você pode selecionar no máximo 10 fotos.');
+  if(this.files.length>5){
+    alert('Selecione no máximo 5 fotos.');
   }
 });
 
-document.getElementById('formCadastro').addEventListener('submit', function (evento) {
-  evento.preventDefault();
+document.getElementById('formCadastro').addEventListener('submit',function(e){
+  e.preventDefault();
 
-  const dados = new FormData(this);
-  const cadastro = {
-    id: Date.now().toString(),
-    nome: dados.get('nome').trim(),
-    categoria: dados.get('categoria'),
-    responsavel: dados.get('responsavel').trim(),
-    endereco: dados.get('endereco').trim(),
-    whatsapp: dados.get('whatsapp').replace(/\D/g, ''),
-    preco: dados.get('preco').trim(),
-    horario: dados.get('horario').trim(),
-    descricao: dados.get('descricao').trim(),
-    fotos: [...fotosSelecionadas],
-    status: 'pendente',
-    criadoEm: new Date().toISOString()
+  const dados=new FormData(this);
+
+  const cadastro={
+    id:Date.now().toString(),
+    nome:String(dados.get('nome')||'').trim(),
+    categoria:String(dados.get('categoria')||''),
+    responsavel:String(dados.get('responsavel')||'').trim(),
+    endereco:String(dados.get('endereco')||'').trim(),
+    whatsapp:String(dados.get('whatsapp')||'').replace(/\D/g,''),
+    preco:String(dados.get('preco')||'').trim(),
+    horario:String(dados.get('horario')||'').trim(),
+    descricao:String(dados.get('descricao')||'').trim(),
+    fotos:fotosSelecionadas.slice(),
+    status:'pendente'
   };
 
-  if (!cadastro.nome || !cadastro.categoria || !cadastro.responsavel ||
-      !cadastro.endereco || !cadastro.whatsapp || !cadastro.descricao) {
+  if(!cadastro.nome||!cadastro.categoria||!cadastro.responsavel||
+     !cadastro.endereco||!cadastro.whatsapp||!cadastro.descricao){
     alert('Preencha todos os campos obrigatórios.');
     return;
   }
 
-  if (cadastro.whatsapp.length < 10 || cadastro.whatsapp.length > 13) {
+  if(cadastro.whatsapp.length<10||cadastro.whatsapp.length>13){
     alert('Confira o WhatsApp e informe o DDD.');
     return;
   }
 
-  const cadastros = obterCadastros();
-  cadastros.push(cadastro);
-  salvarCadastros(cadastros);
+  const lista=obter();
+  lista.push(cadastro);
+  salvar(lista);
 
-  alert('Cadastro enviado! Ele ficará visível ao público somente depois da aprovação do administrador.');
+  alert('Cadastro enviado! Ele aparecerá ao público somente depois da aprovação.');
 
   this.reset();
-  fotosSelecionadas = [];
-  document.getElementById('previaFotos').innerHTML = '';
+  fotosSelecionadas=[];
+  document.getElementById('previaFotos').innerHTML='';
   voltar();
 });
 
-function criarBotaoMapa(endereco) {
-  const link = document.createElement('a');
-  link.href = 'https://www.google.com/maps/dir/?api=1&destination=' +
-    encodeURIComponent(endereco + ', Salvador, Bahia, Brasil');
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.textContent = 'Como chegar';
-  link.className = 'botao-mapa';
-  return link;
-}
+function criarCard(cadastro,admin=false){
+  const card=document.createElement('article');
+  card.className='business-item';
 
-function criarCard(cadastro, administrativo = false) {
-  const card = document.createElement('article');
-  card.className = 'cartao-negocio';
-
-  const titulo = document.createElement('h3');
-  titulo.textContent = cadastro.nome;
+  const titulo=document.createElement('h3');
+  titulo.textContent=cadastro.nome;
   card.appendChild(titulo);
 
-  const categoria = document.createElement('p');
-  categoria.textContent = 'Categoria: ' + cadastro.categoria;
-  card.appendChild(categoria);
+  [
+    ['Categoria',cadastro.categoria],
+    ['Endereço',cadastro.endereco],
+    ['Preço',cadastro.preco],
+    ['Horário',cadastro.horario],
+    ['',cadastro.descricao]
+  ].forEach(([rotulo,valor])=>{
+    if(!valor)return;
 
-  const endereco = document.createElement('p');
-  endereco.textContent = 'Endereço: ' + cadastro.endereco;
-  card.appendChild(endereco);
+    const p=document.createElement('p');
+    p.textContent=rotulo?rotulo+': '+valor:valor;
+    card.appendChild(p);
+  });
 
-  if (cadastro.preco) {
-    const preco = document.createElement('p');
-    preco.textContent = 'Preço: ' + cadastro.preco;
-    card.appendChild(preco);
-  }
+  if(cadastro.fotos&&cadastro.fotos.length){
+    const galeria=document.createElement('div');
 
-  if (cadastro.horario) {
-    const horario = document.createElement('p');
-    horario.textContent = 'Horário: ' + cadastro.horario;
-    card.appendChild(horario);
-  }
-
-  const descricao = document.createElement('p');
-  descricao.textContent = cadastro.descricao;
-  card.appendChild(descricao);
-
-  if (cadastro.fotos && cadastro.fotos.length) {
-    const galeria = document.createElement('div');
-    galeria.className = 'previa-fotos';
-
-    cadastro.fotos.forEach(foto => {
-      const img = document.createElement('img');
-      img.src = foto;
-      img.alt = 'Foto de ' + cadastro.nome;
-      img.style.width = '100px';
-      img.style.height = '80px';
-      img.style.objectFit = 'cover';
-      img.style.borderRadius = '8px';
-      img.style.margin = '4px';
+    cadastro.fotos.forEach(foto=>{
+      const img=document.createElement('img');
+      img.src=foto;
+      img.alt='Foto de '+cadastro.nome;
+      img.style.cssText='width:100px;height:80px;object-fit:cover;border-radius:8px;margin:4px';
       galeria.appendChild(img);
     });
 
     card.appendChild(galeria);
   }
 
-  if (cadastro.whatsapp) {
-    const whatsapp = document.createElement('a');
-    whatsapp.href = 'https://wa.me/55' + cadastro.whatsapp;
-    whatsapp.target = '_blank';
-    whatsapp.rel = 'noopener noreferrer';
-    whatsapp.textContent = 'Falar no WhatsApp';
-    whatsapp.className = 'botao-whatsapp';
-    card.appendChild(whatsapp);
+  const acoes=document.createElement('div');
+  acoes.className='business-actions';
+
+  if(cadastro.whatsapp){
+    const whatsapp=document.createElement('a');
+    whatsapp.className='whatsapp-link';
+    whatsapp.href='https://wa.me/55'+cadastro.whatsapp;
+    whatsapp.target='_blank';
+    whatsapp.rel='noopener noreferrer';
+    whatsapp.textContent='WhatsApp';
+    acoes.appendChild(whatsapp);
   }
 
-  card.appendChild(criarBotaoMapa(cadastro.endereco));
+  const mapa=document.createElement('a');
+  mapa.className='map-link';
+  mapa.href='https://www.google.com/maps/dir/?api=1&destination='+
+    encodeURIComponent(cadastro.endereco+', Salvador, Bahia, Brasil');
+  mapa.target='_blank';
+  mapa.rel='noopener noreferrer';
+  mapa.textContent='Como chegar';
+  acoes.appendChild(mapa);
 
-  if (administrativo) {
-    const status = document.createElement('p');
-    status.textContent = 'Status: ' + cadastro.status;
-    card.appendChild(status);
+  if(admin){
+    const status=document.createElement('span');
+    status.textContent='Status: '+cadastro.status;
+    acoes.appendChild(status);
 
-    if (cadastro.status === 'pendente') {
-      const aprovar = document.createElement('button');
-      aprovar.textContent = 'Aprovar';
-      aprovar.onclick = () => mudarStatus(cadastro.id, 'aprovado');
-      card.appendChild(aprovar);
+    if(cadastro.status==='pendente'){
+      const aprovar=document.createElement('button');
+      aprovar.className='approve-btn';
+      aprovar.textContent='Aprovar';
+      aprovar.onclick=()=>mudarStatus(cadastro.id,'aprovado');
+      acoes.appendChild(aprovar);
 
-      const rejeitar = document.createElement('button');
-      rejeitar.textContent = 'Rejeitar';
-      rejeitar.onclick = () => mudarStatus(cadastro.id, 'rejeitado');
-      card.appendChild(rejeitar);
+      const rejeitar=document.createElement('button');
+      rejeitar.className='reject-btn';
+      rejeitar.textContent='Rejeitar';
+      rejeitar.onclick=()=>mudarStatus(cadastro.id,'rejeitado');
+      acoes.appendChild(rejeitar);
     }
   }
 
+  card.appendChild(acoes);
   return card;
 }
 
-function exibirListaPublica(lista) {
-  const destino = document.getElementById('listaPublica');
-  if (!destino) return;
+function exibir(lista){
+  const destino=document.getElementById('listaPublica');
+  destino.innerHTML='';
 
-  destino.innerHTML = '';
-
-  if (!lista.length) {
-    destino.textContent = 'Nenhum estabelecimento aprovado encontrado.';
+  if(!lista.length){
+    destino.innerHTML='<p>Nenhum estabelecimento aprovado encontrado nesta categoria.</p>';
     return;
   }
 
-  lista.forEach(cadastro => destino.appendChild(criarCard(cadastro)));
-}
-
-function renderPublicadas() {
-  const aprovados = obterCadastros().filter(c => c.status === 'aprovado');
-  exibirListaPublica(aprovados);
-}
-
-function mostrarAprovacoes() {
-  const destino = document.getElementById('listaAdmin');
-  if (!destino) return;
-
-  destino.innerHTML = '';
-  const cadastros = obterCadastros();
-
-  if (!cadastros.length) {
-    destino.textContent = 'Ainda não há cadastros neste navegador.';
-    return;
-  }
-
-  cadastros.forEach(cadastro => {
-    destino.appendChild(criarCard(cadastro, true));
+  lista.forEach(c=>{
+    destino.appendChild(criarCard(c));
   });
 }
 
-function mudarStatus(id, status) {
-  const cadastros = obterCadastros().map(cadastro =>
-    cadastro.id === id ? { ...cadastro, status } : cadastro
-  );
+function mostrarAdmin(){
+  const destino=document.getElementById('listaAdmin');
+  destino.innerHTML='';
 
-  salvarCadastros(cadastros);
-  mostrarAprovacoes();
-  renderPublicadas();
-}
+  const lista=obter();
 
-function limparCadastros() {
-  if (!confirm('Tem certeza de que deseja apagar todos os cadastros deste navegador?')) {
+  if(!lista.length){
+    destino.innerHTML='<p>Nenhum cadastro neste navegador.</p>';
     return;
   }
 
-  localStorage.removeItem(CHAVE);
-  mostrarAprovacoes();
-  renderPublicadas();
+  lista.forEach(c=>{
+    destino.appendChild(criarCard(c,true));
+  });
 }
 
-renderPublicadas();
+function mudarStatus(id,status){
+  salvar(obter().map(c=>
+    c.id===id?{...c,status}:c
+  ));
+
+  mostrarAdmin();
+}
+
+function limparCadastros(){
+  if(!confirm('Apagar todos os cadastros deste navegador?'))return;
+
+  localStorage.removeItem(CHAVE);
+  mostrarAdmin();
+}
+
+montar();
 </script>
 </body>
-</html>
+  </html>
